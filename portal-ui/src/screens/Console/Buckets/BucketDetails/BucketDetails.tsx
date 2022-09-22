@@ -84,15 +84,6 @@ const AccessDetailsPanel = withSuspense(
 const BucketSummaryPanel = withSuspense(
   React.lazy(() => import("./BucketSummaryPanel"))
 );
-const BucketEventsPanel = withSuspense(
-  React.lazy(() => import("./BucketEventsPanel"))
-);
-const BucketReplicationPanel = withSuspense(
-  React.lazy(() => import("./BucketReplicationPanel"))
-);
-const BucketLifecyclePanel = withSuspense(
-  React.lazy(() => import("./BucketLifecyclePanel"))
-);
 
 const styles = (theme: Theme) =>
   createStyles({
@@ -167,8 +158,6 @@ const BucketDetails = ({ classes }: IBucketDetailsProps) => {
 
   const manageBucketRoutes: Record<string, any> = {
     events: "/admin/events",
-    replication: "/admin/replication",
-    lifecycle: "/admin/lifecycle",
     access: "/admin/access",
     prefix: "/admin/prefix",
   };
@@ -290,20 +279,6 @@ const BucketDetails = ({ classes }: IBucketDetailsProps) => {
               <div className={classes.contentSpacer}>
                 <Routes>
                   <Route path="summary" element={<BucketSummaryPanel />} />
-                  <Route path="events" element={<BucketEventsPanel />} />
-                  {distributedSetup && (
-                    <Route
-                      path="replication"
-                      element={<BucketReplicationPanel />}
-                    />
-                  )}
-                  {distributedSetup && (
-                    <Route
-                      path="lifecycle"
-                      element={<BucketLifecyclePanel />}
-                    />
-                  )}
-
                   <Route path="access" element={<AccessDetailsPanel />} />
                   <Route path="prefix" element={<AccessRulePanel />} />
                   <Route
@@ -322,48 +297,6 @@ const BucketDetails = ({ classes }: IBucketDetailsProps) => {
                 value: "summary",
                 component: Link,
                 to: getRoutePath("summary"),
-              },
-            }}
-            {{
-              tabConfig: {
-                label: "Events",
-                value: "events",
-                component: Link,
-                disabled: !hasPermission(bucketName, [
-                  IAM_SCOPES.S3_GET_BUCKET_NOTIFICATIONS,
-                  IAM_SCOPES.S3_PUT_BUCKET_NOTIFICATIONS,
-                ]),
-                to: getRoutePath("events"),
-              },
-            }}
-            {{
-              tabConfig: {
-                label: "Replication",
-                value: "replication",
-                component: Link,
-                disabled:
-                  !distributedSetup ||
-                  (siteReplicationInfo.enabled &&
-                    siteReplicationInfo.curSite) ||
-                  !hasPermission(bucketName, [
-                    IAM_SCOPES.S3_GET_REPLICATION_CONFIGURATION,
-                    IAM_SCOPES.S3_PUT_REPLICATION_CONFIGURATION,
-                  ]),
-                to: getRoutePath("replication"),
-              },
-            }}
-            {{
-              tabConfig: {
-                label: "Lifecycle",
-                value: "lifecycle",
-                component: Link,
-                disabled:
-                  !distributedSetup ||
-                  !hasPermission(bucketName, [
-                    IAM_SCOPES.S3_GET_LIFECYCLE_CONFIGURATION,
-                    IAM_SCOPES.S3_PUT_LIFECYCLE_CONFIGURATION,
-                  ]),
-                to: getRoutePath("lifecycle"),
               },
             }}
             {{

@@ -38,12 +38,9 @@ import {
   MonitoringMenuIcon,
   PerformanceMenuIcon,
   ProfileMenuIcon,
-  SupportMenuIcon,
-  TraceMenuIcon,
   UsersMenuIcon,
 } from "../../icons/SidebarMenus";
 import { hasPermission } from "../../common/SecureComponent";
-import WatchIcon from "../../icons/WatchIcon";
 import RegisterMenuIcon from "../../icons/SidebarMenus/RegisterMenuIcon";
 import {
   ClustersIcon,
@@ -144,20 +141,6 @@ export const validRoutes = (
           component: NavLink,
         },
         {
-          name: "Trace",
-          id: "monitorTrace",
-          to: IAM_PAGES.TOOLS_TRACE,
-          icon: TraceMenuIcon,
-          component: NavLink,
-        },
-        {
-          name: "Watch",
-          id: "watch",
-          component: NavLink,
-          icon: WatchIcon,
-          to: IAM_PAGES.TOOLS_WATCH,
-        },
-        {
           name: "Drives",
           id: "monitorDrives",
           to: IAM_PAGES.TOOLS_HEAL,
@@ -193,65 +176,6 @@ export const validRoutes = (
       name: "Configurations",
       id: "configurations",
       icon: SettingsIcon,
-    },
-    {
-      name: "Support",
-      id: "support",
-      icon: SupportMenuIcon,
-      children: [
-        {
-          name: "Register",
-          id: "register",
-          component: NavLink,
-          icon: RegisterMenuIcon,
-          to: IAM_PAGES.REGISTER_SUPPORT,
-        },
-        {
-          name: "Health",
-          id: "diagnostics",
-          component: NavLink,
-          icon: HealthMenuIcon,
-          to: IAM_PAGES.TOOLS_DIAGNOSTICS,
-        },
-        {
-          name: "Performance",
-          id: "performance",
-          component: NavLink,
-          icon: PerformanceMenuIcon,
-          to: IAM_PAGES.TOOLS_SPEEDTEST,
-        },
-        {
-          name: "Profile",
-          id: "profile",
-          component: NavLink,
-          icon: ProfileMenuIcon,
-          to: IAM_PAGES.PROFILE,
-        },
-
-        // {
-        //   name: "Call Home",
-        //   id: "callhome",
-        //   component: NavLink,
-        //   icon: CallHomeMenuIcon,
-        //   to: IAM_PAGES.CALL_HOME,
-        // },
-        {
-          name: "Inspect",
-          id: "inspectObjects",
-          to: IAM_PAGES.SUPPORT_INSPECT,
-          icon: InspectMenuIcon,
-          component: NavLink,
-        },
-      ],
-    },
-    {
-      component: NavLink,
-      to: IAM_PAGES.LICENSE,
-      name: "License",
-      id: "license",
-      icon: LicenseIcon,
-      badge: LicenseBadge,
-      forceDisplay: true,
     },
     {
       type: "item",

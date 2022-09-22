@@ -47,7 +47,7 @@ const styles = (theme: Theme) =>
     root: {
       marginBottom: 30,
       padding: 20,
-      color: theme.palette.primary.dark,
+      color: theme.palette.secondary.contrastText,
       border: "#E5E5E5 1px solid",
       borderRadius: 2,
       "& .min-icon": {

@@ -64,7 +64,7 @@ const ConfigurationOptions = ({ classes }: IConfigurationOptions) => {
   const { pathname = "" } = useLocation();
 
   let selConfigTab = pathname.substring(pathname.lastIndexOf("/") + 1);
-  selConfigTab = selConfigTab === "settings" ? "region" : selConfigTab;
+  selConfigTab = selConfigTab === "settings" ? "compression" : selConfigTab;
 
   return (
     <Fragment>
@@ -91,7 +91,7 @@ const ConfigurationOptions = ({ classes }: IConfigurationOptions) => {
                   ))}
                   <Route
                     path={"/"}
-                    element={<Navigate to={`${IAM_PAGES.SETTINGS}/region`} />}
+                    element={<Navigate to={`${IAM_PAGES.SETTINGS}/compression`} />}
                   />
                 </Routes>
               }
