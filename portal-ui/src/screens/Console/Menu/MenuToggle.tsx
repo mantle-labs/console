@@ -18,7 +18,8 @@ import React, { Fragment, Suspense, useEffect } from "react";
 import OperatorLogo from "../../../icons/OperatorLogo";
 import DirectPVLogo from "../../../icons/DirectPVLogo";
 
-import { LoginMinIOLogo, VersionIcon } from "../../../icons";
+import { ConsoleLogo, VersionIcon } from "../../../icons";
+import ConsoleLogoWhite from "../../../icons/ConsoleLogoWhite"
 import { Box, IconButton } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import LicensedConsoleLogo from "../Common/Components/LicensedConsoleLogo";
@@ -71,7 +72,6 @@ const MenuToggle = ({ isOpen, onToggle }: MenuToggleProps) => {
     <Box
       sx={{
         width: "100%",
-        boxShadow: "0 3px 10px -6px #426198",
       }}
     >
       <Box
@@ -98,7 +98,7 @@ const MenuToggle = ({ isOpen, onToggle }: MenuToggleProps) => {
               flex: "1",
               "& svg": {
                 fill: "white",
-                width: 120,
+                width: 167,
               },
             },
             "&.mini": {
@@ -118,12 +118,7 @@ const MenuToggle = ({ isOpen, onToggle }: MenuToggleProps) => {
                 <div
                   style={{ marginLeft: "4px", width: 100, textAlign: "right" }}
                 >
-                  <LoginMinIOLogo style={{ width: 100 }} />
-                  <br />
-                  <LicensedConsoleLogo
-                    plan={plan}
-                    isLoading={isLicenseLoading}
-                  />
+                  <ConsoleLogoWhite style={{ width: 100 }} />
                 </div>
               </Fragment>
             ) : (
@@ -153,7 +148,7 @@ const MenuToggle = ({ isOpen, onToggle }: MenuToggleProps) => {
 
             "&:hover": {
               borderRadius: "50%",
-              background: "#073052",
+              background: "#A4493D",
             },
             "& svg": {
               fill: "#ffffff",

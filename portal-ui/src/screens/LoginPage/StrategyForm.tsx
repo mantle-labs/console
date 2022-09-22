@@ -16,7 +16,7 @@
 
 import Grid from "@mui/material/Grid";
 import React, { Fragment } from "react";
-import { setAccessKey, setSecretKey, setSTS, setUseSTS } from "./loginSlice";
+import { setAccessKey, setSecretKey } from "./loginSlice";
 import { Box, InputAdornment, LinearProgress } from "@mui/material";
 import UserFilledIcon from "../../icons/UsersFilledIcon";
 import LockFilledIcon from "../../icons/LockFilledIcon";
@@ -68,8 +68,6 @@ const StrategyForm = () => {
 
   const accessKey = useSelector((state: AppState) => state.login.accessKey);
   const secretKey = useSelector((state: AppState) => state.login.secretKey);
-  const sts = useSelector((state: AppState) => state.login.sts);
-  const useSTS = useSelector((state: AppState) => state.login.useSTS);
 
   const loginSending = useSelector(
     (state: AppState) => state.login.loginSending
@@ -93,7 +91,7 @@ const StrategyForm = () => {
               onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                 dispatch(setAccessKey(e.target.value))
               }
-              placeholder={useSTS ? "STS Username" : "Username"}
+              placeholder="Username"
               name="accessKey"
               autoComplete="username"
               disabled={loginSending}
@@ -110,7 +108,7 @@ const StrategyForm = () => {
               }}
             />
           </Grid>
-          <Grid item xs={12} className={useSTS ? classes.spacerBottom : ""}>
+          <Grid item xs={12} className={classes.spacerBottom}>
             <LoginField
               fullWidth
               className={classes.inputField}
@@ -123,8 +121,8 @@ const StrategyForm = () => {
               id="secretKey"
               autoComplete="current-password"
               disabled={loginSending}
-              placeholder={useSTS ? "STS Secret" : "Password"}
-              variant={"outlined"}
+              placeholder="Password"
+              variant="outlined"
               InputProps={{
                 startAdornment: (
                   <InputAdornment
@@ -137,34 +135,6 @@ const StrategyForm = () => {
               }}
             />
           </Grid>
-          {useSTS && (
-            <Grid item xs={12} className={classes.spacerBottom}>
-              <LoginField
-                fullWidth
-                id="sts"
-                className={classes.inputField}
-                value={sts}
-                onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                  dispatch(setSTS(e.target.value))
-                }
-                placeholder={"STS Token"}
-                name="STS"
-                autoComplete="sts"
-                disabled={loginSending}
-                variant={"outlined"}
-                InputProps={{
-                  startAdornment: (
-                    <InputAdornment
-                      position="start"
-                      className={classes.iconColor}
-                    >
-                      <PasswordKeyIcon />
-                    </InputAdornment>
-                  ),
-                }}
-              />
-            </Grid>
-          )}
         </Grid>
 
         <Grid item xs={12} className={classes.submitContainer}>
@@ -175,9 +145,7 @@ const StrategyForm = () => {
             id="do-login"
             className={classes.submit}
             disabled={
-              (!useSTS && (accessKey === "" || secretKey === "")) ||
-              (useSTS && sts === "") ||
-              loginSending
+              ((accessKey === "" || secretKey === "")) || loginSending
             }
           >
             Login
@@ -185,43 +153,6 @@ const StrategyForm = () => {
         </Grid>
         <Grid item xs={12} className={classes.linearPredef}>
           {loginSending && <LinearProgress />}
-        </Grid>
-        <Grid item xs={12} className={classes.linearPredef}>
-          <Box
-            style={{
-              textAlign: "center",
-              marginTop: 20,
-            }}
-          >
-            <span
-              onClick={() => {
-                dispatch(setUseSTS(!useSTS));
-              }}
-              style={{
-                color: theme.colors.link,
-                font: "normal normal normal 12px/15px Lato",
-                textDecoration: "underline",
-                cursor: "pointer",
-              }}
-            >
-              {!useSTS && <Fragment>Use STS</Fragment>}
-              {useSTS && <Fragment>Use Credentials</Fragment>}
-            </span>
-            <span
-              onClick={() => {
-                dispatch(setUseSTS(!useSTS));
-              }}
-              style={{
-                color: theme.colors.link,
-                font: "normal normal normal 12px/15px Lato",
-                textDecoration: "none",
-                fontWeight: "bold",
-                paddingLeft: 4,
-              }}
-            >
-              ➔
-            </span>
-          </Box>
         </Grid>
       </form>
     </React.Fragment>

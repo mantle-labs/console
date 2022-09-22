@@ -47,7 +47,7 @@ const styles = (theme: Theme) =>
     root: {
       marginBottom: 30,
       padding: 20,
-      color: theme.palette.primary.main,
+      color: theme.palette.primary.dark,
       border: "#E5E5E5 1px solid",
       borderRadius: 2,
       "& .min-icon": {
@@ -63,7 +63,7 @@ const styles = (theme: Theme) =>
         overflowWrap: "break-word",
         wordBreak: "break-all",
         font: "normal normal bold 24px/27px Lato",
-        color: theme.palette.primary.main,
+        color: theme.palette.primary.dark,
 
         "& .MuiTypography-root": {
           fontSize: 19,

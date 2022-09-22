@@ -121,14 +121,14 @@ const useStyles = makeStyles((theme: Theme) =>
     miniLinks: {
       margin: "auto",
       textAlign: "center",
-      color: "#B2DEF5",
+      color: "#F19C50",
       "& a": {
-        color: "#B2DEF5",
+        color: "#F19C50",
         textDecoration: "none",
       },
       "& .min-icon": {
         width: 10,
-        color: "#B2DEF5",
+        color: "#F19C50",
       },
     },
     miniLogo: {
@@ -331,7 +331,6 @@ const Login = () => {
   }, [dispatch, loadingVersion]);
 
   let loginComponent;
-
   switch (loginStrategy.loginStrategy) {
     case loginStrategyType.form: {
       loginComponent = <StrategyForm />;
@@ -477,6 +476,7 @@ const Login = () => {
         </div>
       );
   }
+  
 
   let modeLogo = <ConsoleLogo />;
 
@@ -524,9 +524,10 @@ const Login = () => {
             <Box
               style={{
                 font: "normal normal normal 20px/24px Lato",
+                color: "#551C27",
               }}
             >
-              Multicloud Object Storage
+              Secure Distributed Storage
             </Box>
           </Grid>
           <Grid
@@ -539,90 +540,25 @@ const Login = () => {
             }}
           >
             {loginComponent}
-            <Box
-              style={{
-                textAlign: "center",
-                marginTop: 20,
-              }}
-            >
-              <a
-                href={hyperLink}
-                target="_blank"
-                rel="noreferrer"
-                style={{
-                  color: theme.colors.link,
-                  font: "normal normal normal 12px/15px Lato",
-                }}
-              >
-                Learn more about {isOperator ? "OPERATOR CONSOLE" : "CONSOLE"}
-              </a>
-              <a
-                href={hyperLink}
-                target="_blank"
-                rel="noreferrer"
-                style={{
-                  color: theme.colors.link,
-                  font: "normal normal normal 12px/15px Lato",
-                  textDecoration: "none",
-                  fontWeight: "bold",
-                  paddingLeft: 4,
-                }}
-              >
-                ➔
-              </a>
-            </Box>
           </Grid>
           <Grid item xs={12} className={classes.linkHolder}>
             <div className={classes.miniLinks}>
               <a
-                href="https://docs.min.io/?ref=con"
+                href="https://www.mantle.technology/"
                 target="_blank"
                 rel="noreferrer"
               >
-                <DocumentationIcon /> Documentation
+                <DocumentationIcon /> Information
               </a>
               <span className={classes.separator}>|</span>
               <a
-                href="https://github.com/minio/minio"
+                href="https://github.com/mantle-labs/"
                 target="_blank"
                 rel="noreferrer"
               >
                 <GithubIcon /> Github
               </a>
               <span className={classes.separator}>|</span>
-              <a
-                href="https://subnet.min.io/?ref=con"
-                target="_blank"
-                rel="noreferrer"
-              >
-                <SupportMenuIcon /> Support
-              </a>
-              <span className={classes.separator}>|</span>
-              <a
-                href="https://min.io/download/?ref=con"
-                target="_blank"
-                rel="noreferrer"
-              >
-                <DownloadIcon /> Download
-              </a>
-            </div>
-            <div className={clsx(classes.miniLinks, classes.miniLogo)}>
-              <a
-                href={"https://github.com/minio/minio/releases"}
-                target="_blank"
-                rel="noreferrer"
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  marginBottom: 20,
-                }}
-              >
-                <MinIOTierIconXs /> <b>Latest Version:</b>&nbsp;
-                {!loadingVersion && latestMinIOVersion !== "" && (
-                  <React.Fragment>{latestMinIOVersion}</React.Fragment>
-                )}
-              </a>
             </div>
           </Grid>
         </Grid>
