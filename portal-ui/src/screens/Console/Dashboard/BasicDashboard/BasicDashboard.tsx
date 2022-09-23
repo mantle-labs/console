@@ -140,7 +140,7 @@ const BasicDashboard = ({ usage }: IDashboardProps) => {
               title={"We can't retrieve advanced metrics at this time"}
               help={
                 <Fragment>
-                  MinIO Dashboard will display basic metrics as we couldn't
+                  Mantle SDS Dashboard will display basic metrics as we couldn't
                   connect to Prometheus successfully.
                   <br /> <br />
                   Please try again in a few minutes. If the problem persists,
@@ -162,28 +162,11 @@ const BasicDashboard = ({ usage }: IDashboardProps) => {
                       fontSize: "14px",
                     }}
                   >
-                    MinIO Dashboard will display basic metrics as we couldn’t
+                    Mantle SDS Dashboard will display basic metrics as we couldn’t
                     connect to Prometheus successfully. Please try again in a
                     few minutes. If the problem persists, you can review your
                     configuration and confirm that Prometheus server is up and
                     running.
-                  </Box>
-                  <Box
-                    sx={{
-                      paddingTop: "20px",
-                      fontSize: "14px",
-                      "& a": {
-                        color: (theme) => theme.colors.link,
-                      },
-                    }}
-                  >
-                    <a
-                      href="https://docs.min.io/minio/baremetal/monitoring/metrics-alerts/collect-minio-metrics-using-prometheus.html?ref=con#minio-metrics-collect-using-prometheus"
-                      target="_blank"
-                      rel="noreferrer"
-                    >
-                      Read more about Prometheus on our Docs site.
-                    </a>
                   </Box>
                 </Box>
               }

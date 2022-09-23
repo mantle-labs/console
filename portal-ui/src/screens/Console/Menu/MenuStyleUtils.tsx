@@ -44,12 +44,12 @@ export const menuItemIconStyles: any = {
   "& svg": {
     width: 16,
     height: 16,
-    fill: "#8399AB",
+    fill: "#F0F0F0",
   },
 };
 
 export const menuItemTextStyles: any = {
-  color: "#BCC7D1",
+  color: "#F0F0F0",
   fontSize: "14px",
   marginLeft: "11px",
   "& span": {

@@ -50,7 +50,7 @@ import {
   RecoverIcon,
   StorageIcon,
   TenantsOutlineIcon,
-  TiersIcon,
+  MoneyIcon,
 } from "../../icons";
 import SettingsIcon from "../../icons/SettingsIcon";
 import React from "react";
@@ -113,41 +113,12 @@ export const validRoutes = (
       to: IAM_PAGES.POLICIES,
       icon: AccessMenuIcon,
     },
-
     {
       name: "Monitoring",
-      id: "tools",
-      icon: MonitoringMenuIcon,
-      children: [
-        {
-          name: "Metrics",
-          id: "monitorMetrics",
-          to: IAM_PAGES.DASHBOARD,
-          icon: MetricsMenuIcon,
-          component: NavLink,
-        },
-        {
-          name: "Logs ",
-          id: "monitorLogs",
-          to: IAM_PAGES.TOOLS_LOGS,
-          icon: LogsMenuIcon,
-          component: NavLink,
-        },
-        {
-          name: "Audit",
-          id: "monitorAudit",
-          to: IAM_PAGES.TOOLS_AUDITLOGS,
-          icon: AuditLogsMenuIcon,
-          component: NavLink,
-        },
-        {
-          name: "Drives",
-          id: "monitorDrives",
-          to: IAM_PAGES.TOOLS_HEAL,
-          icon: DrivesMenuIcon,
-          component: NavLink,
-        },
-      ],
+      id: "monitorMetrics",
+      to: IAM_PAGES.DASHBOARD,
+      icon: MetricsMenuIcon,
+      component: NavLink,
     },
     {
       component: NavLink,
@@ -159,16 +130,9 @@ export const validRoutes = (
     {
       component: NavLink,
       to: IAM_PAGES.TIERS,
-      name: "Tiers",
-      icon: TiersIcon,
-      id: "tiers",
-    },
-    {
-      component: NavLink,
-      to: IAM_PAGES.SITE_REPLICATION,
-      name: "Site Replication",
-      icon: RecoverIcon,
-      id: "sitereplication",
+      name: "Billing",
+      icon: MoneyIcon,
+      id: "billing",
     },
     {
       component: NavLink,
@@ -191,7 +155,7 @@ export const validRoutes = (
           | React.MouseEvent<HTMLDivElement>
       ) => {
         e.preventDefault();
-        window.open("https://docs.min.io/?ref=con", "_blank");
+        window.open("https://developer.mantleblockchain.com/docs", "_blank");
       },
     },
   ];

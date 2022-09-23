@@ -82,10 +82,10 @@ const AddUserHelpBox = () => {
         <div>Learn more about the Users feature</div>
       </Box>
       <Box sx={{ fontSize: "14px", marginBottom: "15px" }}>
-        A MinIO user consists of a unique access key (username) and
+        A Mantle SDS user consists of a unique access key (username) and
         corresponding secret key (password). Clients must authenticate their
         identity by specifying both a valid access key (username) and the
-        corresponding secret key (password) of an existing MinIO user.
+        corresponding secret key (password) of an existing Mantle SDS user.
         <br />
         <br />
         Each user can have one or more assigned policies that explicitly list

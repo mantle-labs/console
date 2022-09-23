@@ -22,13 +22,11 @@ import { ConsoleLogo, VersionIcon } from "../../../icons";
 import ConsoleLogoWhite from "../../../icons/ConsoleLogoWhite"
 import { Box, IconButton } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
-import LicensedConsoleLogo from "../Common/Components/LicensedConsoleLogo";
 import { useSelector } from "react-redux";
 import useApi from "../Common/Hooks/useApi";
 import {
   selDirectPVMode,
   selOpMode,
-  setLicenseInfo,
 } from "../../../systemSlice";
 import { AppState, useAppDispatch } from "../../../store";
 import MenuToggleIcon from "../../../icons/MenuToggleIcon";
@@ -42,31 +40,10 @@ const MenuToggle = ({ isOpen, onToggle }: MenuToggleProps) => {
 
   const dispatch = useAppDispatch();
 
-  const licenseInfo = useSelector(
-    (state: AppState) => state?.system?.licenseInfo
-  );
   const operatorMode = useSelector(selOpMode);
 
   const directPVMode = useSelector(selDirectPVMode);
 
-  const [isLicenseLoading, invokeLicenseInfoApi] = useApi(
-    (res: any) => {
-      dispatch(setLicenseInfo(res));
-    },
-    () => {
-      dispatch(setLicenseInfo(null));
-    }
-  );
-
-  //Get License info from SUBNET
-  useEffect(() => {
-    if (!operatorMode) {
-      invokeLicenseInfoApi("GET", `/api/v1/subnet/info`);
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  const { plan = "" } = licenseInfo || {};
 
   return (
     <Box
@@ -104,7 +81,7 @@ const MenuToggle = ({ isOpen, onToggle }: MenuToggleProps) => {
             "&.mini": {
               color: "#ffffff",
               "& svg": {
-                width: 24,
+                width: 35,
                 fill: "rgba(255, 255, 255, 0.8)",
               },
             },
@@ -118,7 +95,7 @@ const MenuToggle = ({ isOpen, onToggle }: MenuToggleProps) => {
                 <div
                   style={{ marginLeft: "4px", width: 100, textAlign: "right" }}
                 >
-                  <ConsoleLogoWhite style={{ width: 100 }} />
+                  <ConsoleLogoWhite style={{ width: 225 }} />
                 </div>
               </Fragment>
             ) : (
@@ -142,7 +119,7 @@ const MenuToggle = ({ isOpen, onToggle }: MenuToggleProps) => {
             width: "30px",
             "&.mini": {
               "&:hover": {
-                background: "#081C42",
+                background: "#A4493D",
               },
             },
 

@@ -2,7 +2,8 @@ import React, { SVGProps } from "react";
 
 const ConsoleLogoWhite = (props: SVGProps<SVGSVGElement>) => {
   return (
-    <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="2331px" height="1178px" viewBox="0 0 2331 1178" enable-background="new 0 0 2331 1178" xmlSpace="preserve">  <image id="image0" width="2331" height="1178" x="0" y="0"
+    <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="700px" height="700px" viewBox="350 0 2331 1178" enableBackground="new 0 0 2331 1178" xmlSpace="preserve">
+      <image id="image0" width="2331" height="1178" x="0" y="0"
     href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAACRsAAASaCAQAAAB9M+E1AAAABGdBTUEAALGPC/xhBQAAACBjSFJN
 AAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAAAmJLR0QA/4ePzL8AAAAJcEhZ
 cwAAFxEAABcRAcom8z8AAAAHdElNRQfmCRYTFQvKrBq4AABR/ElEQVR42u3dPYwl57kn9kdeFUBF

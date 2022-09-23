@@ -1360,7 +1360,7 @@ export const modalStyleUtils: any = {
 
 export const textStyleUtils: any = {
   textMuted: {
-    color: "#8399AB",
+    color: "#F0F0F0",
   },
 };
 
