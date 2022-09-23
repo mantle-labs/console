@@ -93,9 +93,9 @@ const MenuToggle = ({ isOpen, onToggle }: MenuToggleProps) => {
             {!operatorMode && !directPVMode ? (
               <Fragment>
                 <div
-                  style={{ marginLeft: "4px", width: 100, textAlign: "right" }}
+                  style={{ marginLeft: "4px", width: 100, textAlign: "left" }}
                 >
-                  <ConsoleLogoWhite style={{ width: 225 }} />
+                  <ConsoleLogoWhite />
                 </div>
               </Fragment>
             ) : (
