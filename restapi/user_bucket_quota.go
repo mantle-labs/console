@@ -22,12 +22,12 @@ import (
 	"fmt"
 
 	"github.com/go-openapi/runtime/middleware"
-	"github.com/minio/console/restapi/operations"
-	bucektApi "github.com/minio/console/restapi/operations/bucket"
+	"github.com/mantle-labs/console/restapi/operations"
+	bucektApi "github.com/mantle-labs/console/restapi/operations/bucket"
 
 	"github.com/minio/madmin-go"
 
-	"github.com/minio/console/models"
+	"github.com/mantle-labs/console/models"
 )
 
 func registerBucketQuotaHandlers(api *operations.ConsoleAPI) {

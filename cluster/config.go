@@ -23,9 +23,9 @@ import (
 	"strings"
 	"time"
 
-	xhttp "github.com/minio/console/pkg/http"
+	xhttp "github.com/mantle-labs/console/pkg/http"
 
-	"github.com/minio/console/pkg/utils"
+	"github.com/mantle-labs/console/pkg/utils"
 
 	"github.com/minio/pkg/env"
 )

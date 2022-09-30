@@ -26,10 +26,10 @@ import (
 	"strconv"
 	"time"
 
-	"github.com/minio/console/pkg/logger"
+	"github.com/mantle-labs/console/pkg/logger"
 
 	"github.com/minio/cli"
-	"github.com/minio/console/restapi"
+	"github.com/mantle-labs/console/restapi"
 )
 
 var appCmds = []cli.Command{

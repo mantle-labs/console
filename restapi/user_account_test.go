@@ -22,8 +22,8 @@ import (
 	"net/http"
 	"testing"
 
-	"github.com/minio/console/models"
-	accountApi "github.com/minio/console/restapi/operations/account"
+	"github.com/mantle-labs/console/models"
+	accountApi "github.com/mantle-labs/console/restapi/operations/account"
 	"github.com/stretchr/testify/assert"
 )
 

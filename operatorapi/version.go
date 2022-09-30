@@ -21,15 +21,15 @@ import (
 	"net/http"
 	"time"
 
-	errors "github.com/minio/console/restapi"
+	errors "github.com/mantle-labs/console/restapi"
 
-	xhttp "github.com/minio/console/pkg/http"
+	xhttp "github.com/mantle-labs/console/pkg/http"
 
 	"github.com/go-openapi/runtime/middleware"
-	"github.com/minio/console/models"
-	"github.com/minio/console/operatorapi/operations"
-	"github.com/minio/console/operatorapi/operations/user_api"
-	"github.com/minio/console/pkg/utils"
+	"github.com/mantle-labs/console/models"
+	"github.com/mantle-labs/console/operatorapi/operations"
+	"github.com/mantle-labs/console/operatorapi/operations/user_api"
+	"github.com/mantle-labs/console/pkg/utils"
 )
 
 func registerVersionHandlers(api *operations.OperatorAPI) {

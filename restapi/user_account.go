@@ -20,15 +20,15 @@ import (
 	"context"
 	"net/http"
 
-	authApi "github.com/minio/console/restapi/operations/auth"
+	authApi "github.com/mantle-labs/console/restapi/operations/auth"
 
-	"github.com/minio/console/pkg/auth"
+	"github.com/mantle-labs/console/pkg/auth"
 
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/runtime/middleware"
-	"github.com/minio/console/models"
-	"github.com/minio/console/restapi/operations"
-	accountApi "github.com/minio/console/restapi/operations/account"
+	"github.com/mantle-labs/console/models"
+	"github.com/mantle-labs/console/restapi/operations"
+	accountApi "github.com/mantle-labs/console/restapi/operations/account"
 )
 
 func registerAccountHandlers(api *operations.ConsoleAPI) {

@@ -30,12 +30,12 @@ import (
 
 	"github.com/stretchr/testify/assert"
 
-	xhttp "github.com/minio/console/pkg/http"
+	xhttp "github.com/mantle-labs/console/pkg/http"
 
-	"github.com/minio/console/operatorapi/operations/operator_api"
+	"github.com/mantle-labs/console/operatorapi/operations/operator_api"
 
 	"github.com/go-openapi/swag"
-	"github.com/minio/console/models"
+	"github.com/mantle-labs/console/models"
 	miniov2 "github.com/minio/operator/pkg/apis/minio.min.io/v2"
 	corev1 "k8s.io/api/core/v1"
 	k8sErrors "k8s.io/apimachinery/pkg/api/errors"

@@ -22,10 +22,10 @@ import (
 	"fmt"
 	"testing"
 
-	"github.com/minio/console/models"
+	"github.com/mantle-labs/console/models"
 	"github.com/stretchr/testify/assert"
 
-	bucketApi "github.com/minio/console/restapi/operations/bucket"
+	bucketApi "github.com/mantle-labs/console/restapi/operations/bucket"
 	"github.com/minio/minio-go/v7/pkg/lifecycle"
 )
 

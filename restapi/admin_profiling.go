@@ -22,7 +22,7 @@ import (
 	"net/http"
 
 	"github.com/gorilla/websocket"
-	"github.com/minio/console/models"
+	"github.com/mantle-labs/console/models"
 	"github.com/minio/madmin-go"
 )
 

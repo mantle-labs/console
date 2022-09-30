@@ -23,9 +23,9 @@ import (
 
 	"github.com/dustin/go-humanize"
 	"github.com/go-openapi/runtime/middleware"
-	"github.com/minio/console/models"
-	"github.com/minio/console/restapi/operations"
-	tieringApi "github.com/minio/console/restapi/operations/tiering"
+	"github.com/mantle-labs/console/models"
+	"github.com/mantle-labs/console/restapi/operations"
+	tieringApi "github.com/mantle-labs/console/restapi/operations/tiering"
 	"github.com/minio/madmin-go"
 )
 

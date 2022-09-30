@@ -22,9 +22,9 @@ import (
 	"reflect"
 	"testing"
 
-	"github.com/minio/console/models"
-	"github.com/minio/console/pkg/auth/idp/oauth2"
-	"github.com/minio/console/pkg/auth/ldap"
+	"github.com/mantle-labs/console/models"
+	"github.com/mantle-labs/console/pkg/auth/idp/oauth2"
+	"github.com/mantle-labs/console/pkg/auth/ldap"
 	"github.com/stretchr/testify/assert"
 )
 

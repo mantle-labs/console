@@ -23,14 +23,14 @@ import (
 	"errors"
 	"strings"
 
-	"github.com/minio/console/pkg/utils"
+	"github.com/mantle-labs/console/pkg/utils"
 
-	userApi "github.com/minio/console/restapi/operations/user"
+	userApi "github.com/mantle-labs/console/restapi/operations/user"
 
 	"github.com/go-openapi/runtime/middleware"
-	"github.com/minio/console/models"
-	"github.com/minio/console/restapi/operations"
-	saApi "github.com/minio/console/restapi/operations/service_account"
+	"github.com/mantle-labs/console/models"
+	"github.com/mantle-labs/console/restapi/operations"
+	saApi "github.com/mantle-labs/console/restapi/operations/service_account"
 	"github.com/minio/madmin-go"
 	iampolicy "github.com/minio/pkg/iam/policy"
 )
