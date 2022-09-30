@@ -22,7 +22,7 @@ require (
 	github.com/jessevdk/go-flags v1.5.0
 	github.com/klauspost/compress v1.15.9
 	github.com/minio/cli v1.23.0
-	github.com/minio/console v0.0.0-00010101000000-000000000000
+	github.com/mantle-labs/console v0.0.0-00010101000000-000000000000
 	github.com/minio/directpv v1.4.4-0.20220805090942-948ca4731651
 	github.com/minio/highwayhash v1.0.2
 	github.com/minio/kes v0.19.2
