@@ -21,9 +21,9 @@ import (
 	"errors"
 
 	"github.com/go-openapi/runtime/middleware"
-	"github.com/minio/console/models"
-	"github.com/minio/console/restapi/operations"
-	configurationApi "github.com/minio/console/restapi/operations/configuration"
+	"github.com/mantle-labs/console/models"
+	"github.com/mantle-labs/console/restapi/operations"
+	configurationApi "github.com/mantle-labs/console/restapi/operations/configuration"
 )
 
 func registerAdminNotificationEndpointsHandlers(api *operations.ConsoleAPI) {

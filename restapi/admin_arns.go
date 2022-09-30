@@ -19,11 +19,11 @@ package restapi
 import (
 	"context"
 
-	systemApi "github.com/minio/console/restapi/operations/system"
+	systemApi "github.com/mantle-labs/console/restapi/operations/system"
 
 	"github.com/go-openapi/runtime/middleware"
-	"github.com/minio/console/models"
-	"github.com/minio/console/restapi/operations"
+	"github.com/mantle-labs/console/models"
+	"github.com/mantle-labs/console/restapi/operations"
 )
 
 func registerAdminArnsHandlers(api *operations.ConsoleAPI) {

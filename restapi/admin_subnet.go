@@ -25,13 +25,13 @@ import (
 	"net/url"
 	"os"
 
-	xhttp "github.com/minio/console/pkg/http"
+	xhttp "github.com/mantle-labs/console/pkg/http"
 
 	"github.com/go-openapi/runtime/middleware"
-	"github.com/minio/console/models"
-	"github.com/minio/console/pkg/subnet"
-	"github.com/minio/console/restapi/operations"
-	subnetApi "github.com/minio/console/restapi/operations/subnet"
+	"github.com/mantle-labs/console/models"
+	"github.com/mantle-labs/console/pkg/subnet"
+	"github.com/mantle-labs/console/restapi/operations"
+	subnetApi "github.com/mantle-labs/console/restapi/operations/subnet"
 	"github.com/minio/madmin-go"
 )
 

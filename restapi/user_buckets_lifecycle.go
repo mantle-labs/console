@@ -32,9 +32,9 @@ import (
 	"github.com/minio/minio-go/v7/pkg/lifecycle"
 
 	"github.com/go-openapi/runtime/middleware"
-	"github.com/minio/console/models"
-	"github.com/minio/console/restapi/operations"
-	bucketApi "github.com/minio/console/restapi/operations/bucket"
+	"github.com/mantle-labs/console/models"
+	"github.com/mantle-labs/console/restapi/operations"
+	bucketApi "github.com/mantle-labs/console/restapi/operations/bucket"
 )
 
 type MultiLifecycleResult struct {

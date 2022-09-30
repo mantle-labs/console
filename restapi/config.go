@@ -22,7 +22,7 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/minio/console/pkg/auth/idp/oauth2"
+	"github.com/mantle-labs/console/pkg/auth/idp/oauth2"
 	xcerts "github.com/minio/pkg/certs"
 	"github.com/minio/pkg/env"
 	xnet "github.com/minio/pkg/net"

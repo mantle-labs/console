@@ -22,17 +22,17 @@ import (
 	"sort"
 	"strings"
 
-	"github.com/minio/console/pkg/utils"
+	"github.com/mantle-labs/console/pkg/utils"
 
 	"github.com/go-openapi/swag"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/runtime/middleware"
-	"github.com/minio/console/models"
-	"github.com/minio/console/restapi/operations"
-	accountApi "github.com/minio/console/restapi/operations/account"
-	bucketApi "github.com/minio/console/restapi/operations/bucket"
-	userApi "github.com/minio/console/restapi/operations/user"
+	"github.com/mantle-labs/console/models"
+	"github.com/mantle-labs/console/restapi/operations"
+	accountApi "github.com/mantle-labs/console/restapi/operations/account"
+	bucketApi "github.com/mantle-labs/console/restapi/operations/bucket"
+	userApi "github.com/mantle-labs/console/restapi/operations/user"
 	"github.com/minio/madmin-go"
 	iampolicy "github.com/minio/pkg/iam/policy"
 )

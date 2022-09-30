@@ -21,10 +21,10 @@ import (
 
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/runtime/middleware"
-	"github.com/minio/console/models"
-	"github.com/minio/console/operatorapi/operations"
-	authApi "github.com/minio/console/operatorapi/operations/auth"
-	"github.com/minio/console/restapi"
+	"github.com/mantle-labs/console/models"
+	"github.com/mantle-labs/console/operatorapi/operations"
+	authApi "github.com/mantle-labs/console/operatorapi/operations/auth"
+	"github.com/mantle-labs/console/restapi"
 )
 
 func registerLogoutHandlers(api *operations.OperatorAPI) {
