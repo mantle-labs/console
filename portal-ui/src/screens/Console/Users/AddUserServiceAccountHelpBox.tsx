@@ -108,7 +108,7 @@ const AddUserServiceAccountHelpBox = () => {
           </Box>
           <Box sx={{ paddingTop: "10px" }}>
             Service Accounts support programmatic access by applications. You
-            cannot use a Service Account to log into the MinIO Console.
+            cannot use a Service Account to log into the Mantle SDS Console.
           </Box>
         </Box>
         <Box sx={{ paddingBottom: "20px" }}>

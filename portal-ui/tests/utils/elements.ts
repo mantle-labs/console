@@ -159,33 +159,9 @@ export const settingsWindow = Selector("#settings-container");
 //----------------------------------------------------
 // Settings page vertical tabs
 //----------------------------------------------------
-export const settingsRegionTab = Selector(".MuiTab-root").withAttribute(
-  "href",
-  "/settings/configurations/region"
-);
-export const settingsCacheTab = Selector(".MuiTab-root").withAttribute(
-  "href",
-  "/settings/configurations/cache"
-);
 export const settingsCompressionTab = Selector(".MuiTab-root").withAttribute(
   "href",
   "/settings/configurations/compression"
-);
-export const settingsApiTab = Selector(".MuiTab-root").withAttribute(
-  "href",
-  "/settings/configurations/api"
-);
-export const settingsHealTab = Selector(".MuiTab-root").withAttribute(
-  "href",
-  "/settings/configurations/heal"
-);
-export const settingsScannerTab = Selector(".MuiTab-root").withAttribute(
-  "href",
-  "/settings/configurations/scanner"
-);
-export const settingsEtcdTab = Selector(".MuiTab-root").withAttribute(
-  "href",
-  "/settings/configurations/etcd"
 );
 export const settingsOpenIdTab = Selector(".MuiTab-root").withAttribute(
   "href",
@@ -194,14 +170,6 @@ export const settingsOpenIdTab = Selector(".MuiTab-root").withAttribute(
 export const settingsLdapTab = Selector(".MuiTab-root").withAttribute(
   "href",
   "/settings/configurations/identity_ldap"
-);
-export const settingsLoggerWebhookTab = Selector(".MuiTab-root").withAttribute(
-  "href",
-  "/settings/configurations/logger_webhook"
-);
-export const settingsAuditWebhookTab = Selector(".MuiTab-root").withAttribute(
-  "href",
-  "/settings/configurations/audit_webhook"
 );
 
 //----------------------------------------------------

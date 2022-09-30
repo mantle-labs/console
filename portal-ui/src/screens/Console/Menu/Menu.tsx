@@ -48,7 +48,7 @@ const styles = (theme: Theme) =>
       flexShrink: 0,
       whiteSpace: "nowrap",
       background:
-        "transparent linear-gradient(90deg, #073052 0%, #081C42 100%) 0% 0% no-repeat padding-box !important",
+        "transparent linear-gradient(90deg, #A4493D 0%, #551C27 100%) 0% 0% no-repeat padding-box !important",
       boxShadow: "0px 3px 7px #00000014",
       "& .MuiPaper-root": {
         backgroundColor: "inherit",
@@ -66,7 +66,7 @@ const styles = (theme: Theme) =>
         borderRadius: 0,
       },
       "& ::-webkit-scrollbar-thumb:hover": {
-        background: "#081C42",
+        background: "#5A6375",
       },
     },
     drawerOpen: {

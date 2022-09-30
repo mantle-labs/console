@@ -90,10 +90,10 @@ const UsersHelpBox = () => {
       >
         <FeatureItem icon={<UsersIcon />} description={`Create Users`} />
         <Box sx={{ fontSize: "14px", marginBottom: "15px" }}>
-          A MinIO user consists of a unique access key (username) and
+          A Mantle SDS user consists of a unique access key (username) and
           corresponding secret key (password). Clients must authenticate their
           identity by specifying both a valid access key (username) and the
-          corresponding secret key (password) of an existing MinIO user.
+          corresponding secret key (password) of an existing Mantle SDS user.
           <br />
         </Box>
         <FeatureItem icon={<GroupsIcon />} description={`Manage Groups`} />
@@ -111,14 +111,14 @@ const UsersHelpBox = () => {
           description={`Assign Policies`}
         />
         <Box sx={{ fontSize: "14px", marginBottom: "15px" }}>
-          MinIO uses Policy-Based Access Control (PBAC) to define the authorized
+          Mantle SDS uses Policy-Based Access Control (PBAC) to define the authorized
           actions and resources to which an authenticated user has access. Each
           policy describes one or more actions and conditions that outline the
           permissions of a user or group of users.
           <br />
           <br />
           Each user can access only those resources and operations which are
-          explicitly granted by the built-in role. MinIO denies access to any
+          explicitly granted by the built-in role. Mantle SDS denies access to any
           other resource or action by default.
           <br />
         </Box>

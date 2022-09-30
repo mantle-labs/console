@@ -64,7 +64,7 @@ const ConfigurationOptions = ({ classes }: IConfigurationOptions) => {
   const { pathname = "" } = useLocation();
 
   let selConfigTab = pathname.substring(pathname.lastIndexOf("/") + 1);
-  selConfigTab = selConfigTab === "settings" ? "region" : selConfigTab;
+  selConfigTab = selConfigTab === "settings" ? "compression" : selConfigTab;
 
   return (
     <Fragment>
@@ -91,7 +91,7 @@ const ConfigurationOptions = ({ classes }: IConfigurationOptions) => {
                   ))}
                   <Route
                     path={"/"}
-                    element={<Navigate to={`${IAM_PAGES.SETTINGS}/region`} />}
+                    element={<Navigate to={`${IAM_PAGES.SETTINGS}/compression`} />}
                   />
                 </Routes>
               }
@@ -117,19 +117,8 @@ const ConfigurationOptions = ({ classes }: IConfigurationOptions) => {
             iconComponent={<SettingsIcon />}
             help={
               <Fragment>
-                MinIO supports a variety of configurations ranging from
+                Mantle SDS supports a variety of configurations ranging from
                 encryption, compression, region, notifications, etc.
-                <br />
-                <br />
-                You can learn more at our{" "}
-                <a
-                  href="https://docs.min.io/minio/baremetal/reference/minio-cli/minio-mc-admin/mc-admin.config.html?ref=con#id4"
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  documentation
-                </a>
-                .
               </Fragment>
             }
           />

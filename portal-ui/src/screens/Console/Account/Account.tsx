@@ -277,24 +277,14 @@ const Account = () => {
             iconComponent={<AccountIcon />}
             help={
               <Fragment>
-                MinIO service accounts are child identities of an authenticated
-                MinIO user, including externally managed identities. Each
+                Mantle SDS service accounts are child identities of an authenticated
+                Mantle SDS user, including externally managed identities. Each
                 service account inherits its privileges based on the policies
                 attached to it’s parent user or those groups in which the parent
                 user has membership. Service accounts also support an optional
                 inline policy which further restricts access to a subset of
                 actions and resources available to the parent user.
                 <br />
-                <br />
-                You can learn more at our{" "}
-                <a
-                  href="https://docs.min.io/minio/baremetal/security/minio-identity-management/user-management.html?ref=con#service-accounts"
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  documentation
-                </a>
-                .
               </Fragment>
             }
           />

@@ -18,16 +18,15 @@ import React, { Fragment, Suspense, useEffect } from "react";
 import OperatorLogo from "../../../icons/OperatorLogo";
 import DirectPVLogo from "../../../icons/DirectPVLogo";
 
-import { LoginMinIOLogo, VersionIcon } from "../../../icons";
+import { ConsoleLogo, VersionIcon } from "../../../icons";
+import ConsoleLogoWhite from "../../../icons/ConsoleLogoWhite"
 import { Box, IconButton } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
-import LicensedConsoleLogo from "../Common/Components/LicensedConsoleLogo";
 import { useSelector } from "react-redux";
 import useApi from "../Common/Hooks/useApi";
 import {
   selDirectPVMode,
   selOpMode,
-  setLicenseInfo,
 } from "../../../systemSlice";
 import { AppState, useAppDispatch } from "../../../store";
 import MenuToggleIcon from "../../../icons/MenuToggleIcon";
@@ -41,37 +40,15 @@ const MenuToggle = ({ isOpen, onToggle }: MenuToggleProps) => {
 
   const dispatch = useAppDispatch();
 
-  const licenseInfo = useSelector(
-    (state: AppState) => state?.system?.licenseInfo
-  );
   const operatorMode = useSelector(selOpMode);
 
   const directPVMode = useSelector(selDirectPVMode);
 
-  const [isLicenseLoading, invokeLicenseInfoApi] = useApi(
-    (res: any) => {
-      dispatch(setLicenseInfo(res));
-    },
-    () => {
-      dispatch(setLicenseInfo(null));
-    }
-  );
-
-  //Get License info from SUBNET
-  useEffect(() => {
-    if (!operatorMode) {
-      invokeLicenseInfoApi("GET", `/api/v1/subnet/info`);
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  const { plan = "" } = licenseInfo || {};
 
   return (
     <Box
       sx={{
         width: "100%",
-        boxShadow: "0 3px 10px -6px #426198",
       }}
     >
       <Box
@@ -98,13 +75,13 @@ const MenuToggle = ({ isOpen, onToggle }: MenuToggleProps) => {
               flex: "1",
               "& svg": {
                 fill: "white",
-                width: 120,
+                width: 167,
               },
             },
             "&.mini": {
               color: "#ffffff",
               "& svg": {
-                width: 24,
+                width: 35,
                 fill: "rgba(255, 255, 255, 0.8)",
               },
             },
@@ -116,14 +93,9 @@ const MenuToggle = ({ isOpen, onToggle }: MenuToggleProps) => {
             {!operatorMode && !directPVMode ? (
               <Fragment>
                 <div
-                  style={{ marginLeft: "4px", width: 100, textAlign: "right" }}
+                  style={{ marginLeft: "4px", width: 100, textAlign: "left" }}
                 >
-                  <LoginMinIOLogo style={{ width: 100 }} />
-                  <br />
-                  <LicensedConsoleLogo
-                    plan={plan}
-                    isLoading={isLicenseLoading}
-                  />
+                  <ConsoleLogoWhite />
                 </div>
               </Fragment>
             ) : (
@@ -147,13 +119,13 @@ const MenuToggle = ({ isOpen, onToggle }: MenuToggleProps) => {
             width: "30px",
             "&.mini": {
               "&:hover": {
-                background: "#081C42",
+                background: "#A4493D",
               },
             },
 
             "&:hover": {
               borderRadius: "50%",
-              background: "#073052",
+              background: "#A4493D",
             },
             "& svg": {
               fill: "#ffffff",

@@ -38,12 +38,9 @@ import {
   MonitoringMenuIcon,
   PerformanceMenuIcon,
   ProfileMenuIcon,
-  SupportMenuIcon,
-  TraceMenuIcon,
   UsersMenuIcon,
 } from "../../icons/SidebarMenus";
 import { hasPermission } from "../../common/SecureComponent";
-import WatchIcon from "../../icons/WatchIcon";
 import RegisterMenuIcon from "../../icons/SidebarMenus/RegisterMenuIcon";
 import {
   ClustersIcon,
@@ -53,7 +50,7 @@ import {
   RecoverIcon,
   StorageIcon,
   TenantsOutlineIcon,
-  TiersIcon,
+  MoneyIcon,
 } from "../../icons";
 import SettingsIcon from "../../icons/SettingsIcon";
 import React from "react";
@@ -116,55 +113,12 @@ export const validRoutes = (
       to: IAM_PAGES.POLICIES,
       icon: AccessMenuIcon,
     },
-
     {
       name: "Monitoring",
-      id: "tools",
-      icon: MonitoringMenuIcon,
-      children: [
-        {
-          name: "Metrics",
-          id: "monitorMetrics",
-          to: IAM_PAGES.DASHBOARD,
-          icon: MetricsMenuIcon,
-          component: NavLink,
-        },
-        {
-          name: "Logs ",
-          id: "monitorLogs",
-          to: IAM_PAGES.TOOLS_LOGS,
-          icon: LogsMenuIcon,
-          component: NavLink,
-        },
-        {
-          name: "Audit",
-          id: "monitorAudit",
-          to: IAM_PAGES.TOOLS_AUDITLOGS,
-          icon: AuditLogsMenuIcon,
-          component: NavLink,
-        },
-        {
-          name: "Trace",
-          id: "monitorTrace",
-          to: IAM_PAGES.TOOLS_TRACE,
-          icon: TraceMenuIcon,
-          component: NavLink,
-        },
-        {
-          name: "Watch",
-          id: "watch",
-          component: NavLink,
-          icon: WatchIcon,
-          to: IAM_PAGES.TOOLS_WATCH,
-        },
-        {
-          name: "Drives",
-          id: "monitorDrives",
-          to: IAM_PAGES.TOOLS_HEAL,
-          icon: DrivesMenuIcon,
-          component: NavLink,
-        },
-      ],
+      id: "monitorMetrics",
+      to: IAM_PAGES.DASHBOARD,
+      icon: MetricsMenuIcon,
+      component: NavLink,
     },
     {
       component: NavLink,
@@ -176,16 +130,9 @@ export const validRoutes = (
     {
       component: NavLink,
       to: IAM_PAGES.TIERS,
-      name: "Tiers",
-      icon: TiersIcon,
-      id: "tiers",
-    },
-    {
-      component: NavLink,
-      to: IAM_PAGES.SITE_REPLICATION,
-      name: "Site Replication",
-      icon: RecoverIcon,
-      id: "sitereplication",
+      name: "Billing",
+      icon: MoneyIcon,
+      id: "billing",
     },
     {
       component: NavLink,
@@ -193,65 +140,6 @@ export const validRoutes = (
       name: "Configurations",
       id: "configurations",
       icon: SettingsIcon,
-    },
-    {
-      name: "Support",
-      id: "support",
-      icon: SupportMenuIcon,
-      children: [
-        {
-          name: "Register",
-          id: "register",
-          component: NavLink,
-          icon: RegisterMenuIcon,
-          to: IAM_PAGES.REGISTER_SUPPORT,
-        },
-        {
-          name: "Health",
-          id: "diagnostics",
-          component: NavLink,
-          icon: HealthMenuIcon,
-          to: IAM_PAGES.TOOLS_DIAGNOSTICS,
-        },
-        {
-          name: "Performance",
-          id: "performance",
-          component: NavLink,
-          icon: PerformanceMenuIcon,
-          to: IAM_PAGES.TOOLS_SPEEDTEST,
-        },
-        {
-          name: "Profile",
-          id: "profile",
-          component: NavLink,
-          icon: ProfileMenuIcon,
-          to: IAM_PAGES.PROFILE,
-        },
-
-        // {
-        //   name: "Call Home",
-        //   id: "callhome",
-        //   component: NavLink,
-        //   icon: CallHomeMenuIcon,
-        //   to: IAM_PAGES.CALL_HOME,
-        // },
-        {
-          name: "Inspect",
-          id: "inspectObjects",
-          to: IAM_PAGES.SUPPORT_INSPECT,
-          icon: InspectMenuIcon,
-          component: NavLink,
-        },
-      ],
-    },
-    {
-      component: NavLink,
-      to: IAM_PAGES.LICENSE,
-      name: "License",
-      id: "license",
-      icon: LicenseIcon,
-      badge: LicenseBadge,
-      forceDisplay: true,
     },
     {
       type: "item",
@@ -267,7 +155,7 @@ export const validRoutes = (
           | React.MouseEvent<HTMLDivElement>
       ) => {
         e.preventDefault();
-        window.open("https://docs.min.io/?ref=con", "_blank");
+        window.open("https://developer.mantleblockchain.com/docs", "_blank");
       },
     },
   ];
