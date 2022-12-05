@@ -30,6 +30,7 @@ import { CircleIcon } from "../../../../icons";
 import { commonDashboardInfocard } from "../../Common/FormComponents/common/styleLibrary";
 import { STATUS_COLORS } from "./Utils";
 import { useTranslation } from 'react-i18next';
+import { CA } from 'country-flag-icons/react/3x2';
 
 const styles = (theme: Theme) =>
   createStyles({
@@ -55,16 +56,6 @@ const driveStatusColor = (health_status: string) => {
 const DriveInfoItem = ({ drive }: ICardProps) => {
   const { t } = useTranslation();
 
-  const freeSpace = drive.totalSpace - drive.usedSpace;
-
-  const plotValues = [
-    { value: freeSpace, color: "#D6D6D6", label: "Free Space" },
-    {
-      value: drive.usedSpace,
-      color: capacityColors(drive.usedSpace, drive.totalSpace),
-      label: "Used Space",
-    },
-  ];
   return (
     <Box
       sx={{
@@ -146,41 +137,24 @@ const DriveInfoItem = ({ drive }: ICardProps) => {
         >
           <Box sx={{ flex: 1 }}>
             <div style={{ position: "relative", width: 110, height: 110 }}>
-              <span
-                style={{
-                  position: "absolute",
-                  top: "50%",
-                  left: "50%",
-                  transform: "translate(-50%, -50%)",
-                  fontWeight: "bold",
-                  color: "#000",
-                  fontSize: 12,
-                }}
-              >
-                {niceBytesInt(drive.usedSpace)}
-              </span>
               <div>
-                <PieChart width={110} height={110}>
-                  <Pie
-                    data={plotValues}
-                    cx={"50%"}
-                    cy={"50%"}
-                    dataKey="value"
-                    outerRadius={50}
-                    innerRadius={40}
-                    startAngle={-70}
-                    endAngle={360}
-                    animationDuration={1}
-                  >
-                    {plotValues.map((entry, index) => (
-                      <Cell key={`cellCapacity-${index}`} fill={entry.color} />
-                    ))}
-                  </Pie>
-                </PieChart>
+                Drive Name
+              </div>
+              <div className="info-label">
+                Drive Location
               </div>
             </div>
           </Box>
+          <Box
+            sx={{
+              display: "flex",
+              flex: 2,
+              flexGrow: 1,
+            }}
+          >
+            <CA title="Canada" style={{width: 50, height: 50}}></CA>
 
+          </Box>
           <Box
             sx={{
               display: "flex",
@@ -197,36 +171,9 @@ const DriveInfoItem = ({ drive }: ICardProps) => {
               }}
             >
               <div className="info-value">
-                {niceBytes(
-                  drive.totalSpace ? drive.totalSpace.toString() : "0"
-                )}
+                OK
               </div>
-              <label className="info-label">{t("capacity")}</label>
-            </Box>
-
-            <Box
-              sx={{
-                display: "flex",
-                flexFlow: "column",
-              }}
-            >
-              <div className="info-value">
-                {niceBytes(drive.usedSpace ? drive.usedSpace.toString() : "0")}
-              </div>
-              <label className="info-label">{t("used")}</label>
-            </Box>
-            <Box
-              sx={{
-                display: "flex",
-                flexFlow: "column",
-              }}
-            >
-              <div className="info-value">
-                {niceBytes(
-                  drive.availableSpace ? drive.availableSpace.toString() : "0"
-                )}
-              </div>
-              <label className="info-label">{t("available")}</label>
+              <label className="info-label">Status</label>
             </Box>
           </Box>
         </Box>

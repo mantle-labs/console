@@ -42,15 +42,10 @@ export interface ServerInfo {
 
 export interface IDriveInfo {
   state: string;
-  uuid: string;
+  name: string;
   endpoint: string;
-  drivePath: string;
-  rootDisk: boolean;
+  country: string;
   healing: boolean;
-  model: string;
-  totalSpace: number;
-  usedSpace: number;
-  availableSpace: number;
 }
 
 export interface zoomState {

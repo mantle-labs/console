@@ -63,6 +63,7 @@ interface IDashboardProps {
 }
 
 const getServersList = (usage: Usage | null) => {
+  console.log(usage)
   if (usage !== null) {
     return usage.servers.sort(function (a, b) {
       const nameA = a.endpoint.toLowerCase();
@@ -202,7 +203,8 @@ const BasicDashboard = ({ usage }: IDashboardProps) => {
               <StatusCountCard
                 offlineCount={offlineDrives.length}
                 onlineCount={onlineDrives.length}
-                label={t("drives")}
+                location="Montreal"
+                label="SDS"
                 icon={<DrivesIcon />}
               />
             </BoxItem>

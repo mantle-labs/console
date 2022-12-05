@@ -25,6 +25,7 @@ export const StatusCountCard = ({
   label = "",
   okStatusText = "Online",
   notOkStatusText = "Offline",
+  location = ""
 }: {
   icon: any;
   onlineCount: number;
@@ -32,6 +33,7 @@ export const StatusCountCard = ({
   label: string;
   okStatusText?: string;
   notOkStatusText?: string;
+  location?: string
 }) => {
   return (
     <Box
@@ -71,7 +73,75 @@ export const StatusCountCard = ({
             {label}
           </Box>
 
-          <Box
+          {location? <Box
+            sx={{
+              marginTop: "15px",
+              display: "flex",
+              alignItems: "center",
+              gap: "5px",
+              justifyContent: "space-between",
+              paddingBottom: {
+                md: "0px",
+                xs: "10px",
+              },
+              fontSize: {
+                xl: "55px",
+                lg: "50px",
+                md: "45px",
+                xs: "35px",
+              },
+              flexFlow: "row",
+              fontWeight: 600,
+
+              "& .stat-text": {
+                color: "#696969",
+                fontSize: "12px",
+                marginTop: "8px",
+              },
+              "& .stat-value": {
+                textAlign: "center",
+                height: "50px",
+              },
+              "& .min-icon": {
+                marginRight: "8px",
+                marginTop: "8px",
+                height: "10px",
+                width: "10px",
+              },
+            }}
+          >
+            <Box>
+              <Box
+                sx={{
+                  display: "flex",
+                  alignItems: "center",
+                  marginTop: "5px",
+                  "& .min-icon": {
+                    fill: "#4CCB92",
+                  },
+                }}
+              >
+                <CircleIcon />
+                <div className="stat-text">{okStatusText}</div>
+              </Box>
+            </Box>
+
+            <Box>
+              <Box
+                sx={{
+                  display: "flex",
+                  alignItems: "center",
+                  marginTop: "8px",
+                  "& .min-icon": {
+                    fill: "#C83B51",
+                  },
+                }}
+              >
+                <div className="stat-text">{location}</div>
+              </Box>
+            </Box>
+          </Box>
+          :<Box
             sx={{
               display: "flex",
               alignItems: "center",
@@ -140,7 +210,7 @@ export const StatusCountCard = ({
                 <div className="stat-text">{notOkStatusText}</div>
               </Box>
             </Box>
-          </Box>
+          </Box>}
         </Box>
         <Box
           sx={{
