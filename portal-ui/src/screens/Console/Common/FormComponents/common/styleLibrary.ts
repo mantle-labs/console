@@ -741,7 +741,7 @@ export const tooltipCommon = {
 
 export const snackBarCommon = {
   snackBar: {
-    backgroundColor: "#551C27",
+    backgroundColor: "#135cfd",
     fontWeight: 400,
     fontFamily: "Lato, sans-serif",
     fontSize: 14,

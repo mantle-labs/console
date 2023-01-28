@@ -528,7 +528,7 @@ const Login = () => {
             <Box
               style={{
                 font: "normal normal normal 20px/24px Lato",
-                color: "#551C27",
+                color: "#135cfd",
               }}
             >
              {t('app_title')}

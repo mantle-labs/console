@@ -34,7 +34,7 @@ export const menuItemIconStyles: any = {
   width: 37,
   minWidth: 37,
   height: 37,
-  background: "#551C27",
+  background: "#8255f4",
   border: "2px solid #1F1F1F",
   display: "flex",
   alignItems: "center",
@@ -45,6 +45,9 @@ export const menuItemIconStyles: any = {
     width: 16,
     height: 16,
     fill: "#F0F0F0",
+  },
+  "&:hover, &:focus": {
+    background: "#3cedb7",
   },
 };
 
@@ -106,7 +109,7 @@ export const menuItemStyle: any = {
   "&:hover, &:focus": {
     background: "hsla(0,0%,100%,.25)",
     "& .menu-icon": {
-      background: "#551C27",
+      background: "#3cedb7",
       borderRadius: "50%",
       "& svg": {
         fill: "#c7c3c3",

@@ -119,13 +119,13 @@ const MenuToggle = ({ isOpen, onToggle }: MenuToggleProps) => {
             width: "30px",
             "&.mini": {
               "&:hover": {
-                background: "#A4493D",
+                background: "#8255f4",
               },
             },
 
             "&:hover": {
               borderRadius: "50%",
-              background: "#A4493D",
+              background: "#8255f4",
             },
             "& svg": {
               fill: "#ffffff",
