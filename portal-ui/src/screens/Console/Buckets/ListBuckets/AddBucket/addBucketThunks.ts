@@ -79,7 +79,8 @@ export const addBucketAsync = createAsyncThunk(
         accessKey: tab.accessKey,
         secretKey: tab.secretKey,
         api: tab.api,
-        path: tab.path
+        path: tab.path,
+        ...(tab.secure === true && { secure: true })
         };
       });
 

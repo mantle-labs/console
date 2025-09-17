@@ -58,8 +58,9 @@ import AddBucketName from "./AddBucketName";
 import { IAM_SCOPES } from "../../../../../common/SecureComponent/permissions";
 import { hasPermission } from "../../../../../common/SecureComponent";
 import BucketNamingRules from "./BucketNamingRules";
-import { useTranslation } from 'react-i18next';
+import { useTranslation } from "react-i18next";
 import AddBucketS3Config from "./AddBucketS3Config";
+import JsonPreview from "./JsonPreview";
 
 const styles = (theme: Theme) =>
   createStyles({
@@ -168,6 +169,12 @@ const AddBucket = ({ classes }: IsetProps) => {
     IAM_SCOPES.S3_PUT_BUCKET_OBJECT_LOCK_CONFIGURATION,
   ]);
 
+  //For password to show or not for each tabs
+  const [showPasswords, setShowPasswords] = useState<{ [key: number]: boolean }>({});
+  const handleShowPasswords = (updated: { [key: number]: boolean }) => {
+    setShowPasswords(updated);
+  };
+
   useEffect(() => {
     const bucketNameErrors = [
       !(bucketName.length < 3 || bucketName.length > 63),
@@ -186,22 +193,10 @@ const AddBucket = ({ classes }: IsetProps) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [bucketName]);
 
-  useEffect(() => {
-  const anyS3Errors = tabs.map((tab) => {
-    const url = tab.url.trim();
-    const startsWithHttp = /^https?:\/\//.test(url);
-    //taking everything after the // and before the next /, to isolate host with port
-    const afterProtocol = url.slice(url.indexOf("//") + 2);
-    const hostPort = afterProtocol.split("/")[0];
-    //number of ':' to see if port is good
-    const colonMatches = hostPort.match(/:/g);
-    const hasSingleColon = colonMatches ? colonMatches.length === 1 : false;
-    //looking for good format of port
-    const hasPort = hasSingleColon ? /^\d+$/.test(hostPort.split(":")[1]) : false;
-    return startsWithHttp && hasPort;
-  });
-  setS3ValidationResult(anyS3Errors);
-}, [tabs]);
+//function that will set a error if there is one passed by the child
+  const handleS3Validation = (errors: boolean[]) => {
+  setS3ValidationResult(errors);
+};
 
   useEffect(() => {
     const fetchRecords = () => {
@@ -243,6 +238,17 @@ const AddBucket = ({ classes }: IsetProps) => {
           title={t("create_bucket")}
           icon={<BucketsIcon />}
           helpbox={
+            <Grid
+              container
+              spacing={2}
+              sx={{ height: "100%" }}
+            >
+            {tabs.length > 0 && (
+            <Grid item xs={12}>
+              <JsonPreview tabs={tabs} showPasswords={showPasswords}/>
+            </Grid>
+            )}
+            <Grid item xs={12}>
             <HelpBox
               iconComponent={<BucketsIcon />}
               title={"Buckets"}
@@ -251,10 +257,12 @@ const AddBucket = ({ classes }: IsetProps) => {
                   {t("create_buckets_intro")}
                   <br />
                   <br />
-                  <b>{t("versioning")}</b>{t("versioning_info")}
+                  <b>{t("versioning")}</b>
+                  {t("versioning_info")}
                   <br />
                   <br />
-                  <b>{t("object_locking")}</b>{t("object_locking_info")}{" "}
+                  <b>{t("object_locking")}</b>
+                  {t("object_locking_info")}{" "}
                   {!lockingAllowed ? (
                     <Fragment>
                       <br />
@@ -274,7 +282,8 @@ const AddBucket = ({ classes }: IsetProps) => {
                     <Fragment>
                       <br />
                       <br />
-                      <b>{t("retention")}</b>{t("retention_info")}
+                      <b>{t("retention")}</b>
+                      {t("retention_info")}
                     </Fragment>
                   )}
                   <br />
@@ -282,6 +291,8 @@ const AddBucket = ({ classes }: IsetProps) => {
                 </Fragment>
               }
             />
+            </Grid>
+            </Grid>
           }
         >
           <form
@@ -297,7 +308,7 @@ const AddBucket = ({ classes }: IsetProps) => {
                 <AddBucketName hasErrors={hasErrors} />
               </Grid>
               <Grid item xs={12}>
-                <AddBucketS3Config hasErrors={s3ValidationResult}/>
+                <AddBucketS3Config hasS3Errors={handleS3Validation} showPasswords={handleShowPasswords} />
               </Grid>
               <Grid item xs={12}>
                 <BucketNamingRules errorList={validationResult} />
@@ -491,7 +502,12 @@ const AddBucket = ({ classes }: IsetProps) => {
                 type="submit"
                 variant="contained"
                 color="primary"
-                disabled={addLoading || invalidFields.length > 0 || hasErrors || hasS3Errors}
+                disabled={
+                  addLoading ||
+                  invalidFields.length > 0 ||
+                  hasErrors ||
+                  hasS3Errors
+                }
               >
                 {t("create_bucket")}
               </Button>
