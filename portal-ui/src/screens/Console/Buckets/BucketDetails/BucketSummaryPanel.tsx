@@ -458,7 +458,7 @@ const BucketSummary = ({ classes }: IBucketSummaryProps) => {
           </SecureComponent>
         )}
       </Grid>
-      <BucketHealthInfo></BucketHealthInfo>
+      <BucketHealthInfo bucketName={bucketName}></BucketHealthInfo>
     </Fragment>
   );
 };
