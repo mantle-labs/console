@@ -1052,7 +1052,7 @@ func getSdsHealthResponse(session *models.Principal, params user_api.GetBucketHe
 		return nil, prepareError(err)
 	}
 
-	storageHealth, err := mClient.GetSDSHealth(ctx, "", "", minio.GetObjectOptions{})
+	storageHealth, err := mClient.GetSDSHealth(ctx, params.Name, "", minio.GetObjectOptions{})
 	if err != nil {
 		return nil, prepareError(err)
 	}
