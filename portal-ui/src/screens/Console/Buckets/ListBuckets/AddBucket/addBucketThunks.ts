@@ -22,10 +22,11 @@ import { setErrorSnackMessage } from "../../../../../systemSlice";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { AppState } from "../../../../../store";
 import { resetForm } from "./addBucketsSlice";
+import { s3ConfigObject } from "./AddBucketS3Config";
 
-export const addBucketAsync = createAsyncThunk(
+export const addBucketAsync = createAsyncThunk<string, s3ConfigObject[]>(
   "buckets/addBucketAsync",
-  async (_, { getState, rejectWithValue, dispatch }) => {
+  async (listS3Config, { getState, rejectWithValue, dispatch }) => {
     const state = getState() as AppState;
 
     const bucketName = state.addBucket.name;
@@ -40,7 +41,6 @@ export const addBucketAsync = createAsyncThunk(
     const retentionValidity = state.addBucket.retentionValidity;
     const distributedSetup = state.system.distributedSetup;
     const siteReplicationInfo = state.system.siteReplicationInfo;
-    const s3Tabs = state.addBucket.s3Tabs;
 
     let request: MakeBucketRequest = {
       name: bucketName,
@@ -70,17 +70,17 @@ export const addBucketAsync = createAsyncThunk(
       }
     }
 
-    if(s3Tabs.length !== 0 && s3Tabs != null){
+    if(listS3Config.length !== 0 && listS3Config != null){
       const s3ConfigFile: { [key: string]: any } = {};
 
-      s3Tabs.forEach(tab => {
-        s3ConfigFile[tab.name] = {
-        url: tab.url,
-        accessKey: tab.accessKey,
-        secretKey: tab.secretKey,
-        api: tab.api,
-        path: tab.path,
-        ...(tab.secure === true && { secure: true })
+      listS3Config.forEach((config, idx) => {
+        s3ConfigFile[`storage${idx+1}`] = {
+        url: config.url,
+        accessKey: config.accessKey,
+        secretKey: config.secretKey,
+        api: config.api,
+        path: config.path,
+        ...(config.secure === true && { secure: true })
         };
       });
 

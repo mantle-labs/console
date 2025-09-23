@@ -59,8 +59,7 @@ import { IAM_SCOPES } from "../../../../../common/SecureComponent/permissions";
 import { hasPermission } from "../../../../../common/SecureComponent";
 import BucketNamingRules from "./BucketNamingRules";
 import { useTranslation } from "react-i18next";
-import AddBucketS3Config from "./AddBucketS3Config";
-import JsonPreview from "./JsonPreview";
+import AddBucketS3Config, { s3ConfigObject } from "./AddBucketS3Config";
 
 const styles = (theme: Theme) =>
   createStyles({
@@ -120,7 +119,6 @@ const AddBucket = ({ classes }: IsetProps) => {
     "^((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)(.|$)){4}$"
   );
   const bucketName = useSelector((state: AppState) => state.addBucket.name);
-  const tabs = useSelector((state: AppState) => state.addBucket.s3Tabs);
   const [validationResult, setValidationResult] = useState<boolean[]>([]);
   const [s3ValidationResult, setS3ValidationResult] = useState<boolean[]>([]);
   const errorList = validationResult.filter((v) => !v);
@@ -128,6 +126,7 @@ const AddBucket = ({ classes }: IsetProps) => {
   const s3ErrorList = s3ValidationResult.filter((v) => !v);
   const hasS3Errors = s3ErrorList.length > 0;
   const [records, setRecords] = useState<string[]>([]);
+  const [listS3Config, setListS3Config] = useState<s3ConfigObject[]>([]);
   const versioningEnabled = useSelector(
     (state: AppState) => state.addBucket.versioningEnabled
   );
@@ -169,12 +168,6 @@ const AddBucket = ({ classes }: IsetProps) => {
     IAM_SCOPES.S3_PUT_BUCKET_OBJECT_LOCK_CONFIGURATION,
   ]);
 
-  //For password to show or not for each tabs
-  const [showPasswords, setShowPasswords] = useState<{ [key: number]: boolean }>({});
-  const handleShowPasswords = (updated: { [key: number]: boolean }) => {
-    setShowPasswords(updated);
-  };
-
   useEffect(() => {
     const bucketNameErrors = [
       !(bucketName.length < 3 || bucketName.length > 63),
@@ -194,9 +187,14 @@ const AddBucket = ({ classes }: IsetProps) => {
   }, [bucketName]);
 
 //function that will set a error if there is one passed by the child
-  const handleS3Validation = (errors: boolean[]) => {
-  setS3ValidationResult(errors);
-};
+  const handleS3Errors = (errors: boolean[]) => {
+    setS3ValidationResult(errors);
+  };
+  
+//function that will set a new list of s3 config if there is one passed by the child
+  const handleS3ConfigChange = (s3Config: s3ConfigObject[]) => {
+    setListS3Config(s3Config);
+  };
 
   useEffect(() => {
     const fetchRecords = () => {
@@ -238,17 +236,6 @@ const AddBucket = ({ classes }: IsetProps) => {
           title={t("create_bucket")}
           icon={<BucketsIcon />}
           helpbox={
-            <Grid
-              container
-              spacing={2}
-              sx={{ height: "100%" }}
-            >
-            {tabs.length > 0 && (
-            <Grid item xs={12}>
-              <JsonPreview tabs={tabs} showPasswords={showPasswords}/>
-            </Grid>
-            )}
-            <Grid item xs={12}>
             <HelpBox
               iconComponent={<BucketsIcon />}
               title={"Buckets"}
@@ -291,8 +278,6 @@ const AddBucket = ({ classes }: IsetProps) => {
                 </Fragment>
               }
             />
-            </Grid>
-            </Grid>
           }
         >
           <form
@@ -300,7 +285,7 @@ const AddBucket = ({ classes }: IsetProps) => {
             autoComplete="off"
             onSubmit={(e: React.FormEvent<HTMLFormElement>) => {
               e.preventDefault();
-              dispatch(addBucketAsync());
+              dispatch(addBucketAsync(listS3Config));
             }}
           >
             <Grid container marginTop={1} spacing={2}>
@@ -308,7 +293,7 @@ const AddBucket = ({ classes }: IsetProps) => {
                 <AddBucketName hasErrors={hasErrors} />
               </Grid>
               <Grid item xs={12}>
-                <AddBucketS3Config hasS3Errors={handleS3Validation} showPasswords={handleShowPasswords} />
+                <AddBucketS3Config listS3Config={listS3Config} handleS3Errors={handleS3Errors} handleS3ConfigChange={handleS3ConfigChange}/>
               </Grid>
               <Grid item xs={12}>
                 <BucketNamingRules errorList={validationResult} />

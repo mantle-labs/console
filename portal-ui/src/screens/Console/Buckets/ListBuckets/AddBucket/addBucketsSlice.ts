@@ -16,7 +16,6 @@
 
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { addBucketAsync } from "./addBucketThunks";
-import type { TabData } from "./AddBucketS3Config";
 
 export interface AddBucketState {
   loading: boolean;
@@ -33,7 +32,6 @@ export interface AddBucketState {
   retentionUnit: string;
   retentionValidity: number;
   navigateTo: string;
-  s3Tabs: TabData[];
 }
 
 const initialState: AddBucketState = {
@@ -51,7 +49,6 @@ const initialState: AddBucketState = {
   retentionUnit: "days",
   retentionValidity: 180,
   navigateTo: "",
-  s3Tabs: [],
 };
 
 export const addBucketsSlice = createSlice({
@@ -160,9 +157,6 @@ export const addBucketsSlice = createSlice({
         );
       }
     },
-    setS3Tabs: (state, action: PayloadAction<TabData[]>) =>{
-      state.s3Tabs = action.payload;
-    },
 
     resetForm: (state) => initialState,
   },
@@ -193,7 +187,6 @@ export const {
   setRetentionMode,
   setRetentionUnit,
   setRetentionValidity,
-  setS3Tabs,
 } = addBucketsSlice.actions;
 
 export default addBucketsSlice.reducer;
