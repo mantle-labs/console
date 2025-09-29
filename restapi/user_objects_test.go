@@ -555,7 +555,7 @@ func Test_listObjects(t *testing.T) {
 			minioGetObjectLegalHoldMock = tt.args.objectLegalHoldFunc
 			minioGetObjectRetentionMock = tt.args.objectRetentionFunc
 			minioGetObjectTaggingMock = tt.args.objectGetTaggingFunc
-			resp, err := listBucketObjects(ctx, minClient, tt.args.bucketName, tt.args.prefix, tt.args.recursive, tt.args.withVersions, tt.args.withMetadata)
+			resp, err := listBucketObjects(ctx, minClient, tt.args.bucketName, tt.args.prefix, tt.args.recursive, tt.args.withVersions, tt.args.withMetadata, 0)
 			if err == nil && tt.wantError != nil {
 				t.Errorf("listBucketObjects() error: %v, wantErr: %v", err, tt.wantError)
 			} else if err != nil && tt.wantError == nil {

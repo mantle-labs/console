@@ -70,6 +70,10 @@ type ListObjectsParams struct {
 	  In: query
 	*/
 	WithVersions *bool
+	/*
+	  In: query
+	*/
+	MaxKeys *int
 }
 
 // BindRequest both binds and validates a request, it assumes that complex things implement a Validatable(strfmt.Registry) error interface

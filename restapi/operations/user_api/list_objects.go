@@ -24,6 +24,7 @@ package user_api
 
 import (
 	"net/http"
+	"strconv"
 
 	"github.com/go-openapi/runtime/middleware"
 
@@ -48,10 +49,10 @@ func NewListObjects(ctx *middleware.Context, handler ListObjectsHandler) *ListOb
 	return &ListObjects{Context: ctx, Handler: handler}
 }
 
-/* ListObjects swagger:route GET /buckets/{bucket_name}/objects UserAPI listObjects
+/*
+	ListObjects swagger:route GET /buckets/{bucket_name}/objects UserAPI listObjects
 
 List Objects
-
 */
 type ListObjects struct {
 	Context *middleware.Context
@@ -80,6 +81,13 @@ func (o *ListObjects) ServeHTTP(rw http.ResponseWriter, r *http.Request) {
 	if err := o.Context.BindValidRequest(r, route, &Params); err != nil { // bind params
 		o.Context.Respond(rw, r, route.Produces, route, err)
 		return
+	}
+
+	//Get the max-keys in the url
+	maxKeysStr := Params.HTTPRequest.URL.Query().Get("max-keys")
+	maxKeys, err := strconv.Atoi(maxKeysStr)
+	if err == nil {
+		Params.MaxKeys = &maxKeys
 	}
 
 	res := o.Handler.Handle(Params, principal) // actually handle the request

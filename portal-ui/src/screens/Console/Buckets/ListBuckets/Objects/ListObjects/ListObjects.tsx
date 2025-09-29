@@ -430,6 +430,7 @@ const ListObjects = () => {
     if (!iniLoad) {
       dispatch(setBucketDetailsLoad(true));
       setIniLoad(true);
+      dispatch(setBucketInfo(null))
     }
   }, [iniLoad, dispatch, setIniLoad]);
 
@@ -518,8 +519,24 @@ const ListObjects = () => {
     setSelectedObjects([]);
   }, [simplePath, dispatch, setSelectedObjects]);
 
+  // bucket info
   useEffect(() => {
-    if (loading) {
+    if (loadingBucket) {
+      api
+        .invoke("GET", `/api/v1/buckets/${bucketName}`)
+        .then((res: BucketInfo) => {
+          dispatch(setBucketDetailsLoad(false));
+          dispatch(setBucketInfo(res));
+        })
+        .catch((err: ErrorResponseHandler) => {
+          dispatch(setBucketDetailsLoad(false));
+          dispatch(setErrorSnackMessage(err));
+        });
+    }
+  }, [bucketName, loadingBucket, dispatch]);
+
+  useEffect(() => {
+    if (loading && bucketInfo) {
       if (displayListObjects) {
         let pathPrefix = "";
         if (internalPaths) {
@@ -532,6 +549,9 @@ const ListObjects = () => {
         let currentTimestamp = Date.now();
         setLoadingStartTime(currentTimestamp);
         setLoadingMessage(defLoading);
+
+        //Get the number of objects in the bucketInfo 
+        var maxKeys = bucketInfo?.objects !== undefined && bucketInfo.objects > -1 ? bucketInfo.objects : "";
 
         // We get URL to look into
         let urlTake = `/api/v1/buckets/${bucketName}/objects`;
@@ -559,9 +579,7 @@ const ListObjects = () => {
         api
           .invoke(
             "GET",
-            `${urlTake}${
-              pathPrefix ? `?prefix=${encodeURLString(pathPrefix)}` : ``
-            }`
+            withMaxKeysUrl(urlTake + (pathPrefix ? `?prefix=${encodeURLString(pathPrefix)}` : ``), maxKeys)
           )
           .then((res: BucketObjectItemsList) => {
             const records: BucketObjectItem[] = res.objects || [];
@@ -606,7 +624,7 @@ const ListObjects = () => {
               }
 
               api
-                .invoke("GET", pathTest)
+                .invoke("GET", withMaxKeysUrl(pathTest, maxKeys))
                 .then((res: BucketObjectItemsList) => {
                   //It is a file since it has elements in the object, setting file flag and waiting for component mount
                   if (!res.objects) {
@@ -648,11 +666,7 @@ const ListObjects = () => {
                       api
                         .invoke(
                           "GET",
-                          `${urlTake}${
-                            pathPrefix
-                              ? `?prefix=${encodeURLString(parentPath)}`
-                              : ``
-                          }`
+                          withMaxKeysUrl(urlTake + (pathPrefix ? `?prefix=${encodeURLString(parentPath)}` : ``), maxKeys)
                         )
                         .then((res: BucketObjectItemsList) => {
                           const records: BucketObjectItem[] = res.objects || [];
@@ -707,21 +721,12 @@ const ListObjects = () => {
     allowResources,
   ]);
 
-  // bucket info
-  useEffect(() => {
-    if (loadingBucket) {
-      api
-        .invoke("GET", `/api/v1/buckets/${bucketName}`)
-        .then((res: BucketInfo) => {
-          dispatch(setBucketDetailsLoad(false));
-          dispatch(setBucketInfo(res));
-        })
-        .catch((err: ErrorResponseHandler) => {
-          dispatch(setBucketDetailsLoad(false));
-          dispatch(setErrorSnackMessage(err));
-        });
-    }
-  }, [bucketName, loadingBucket, dispatch]);
+  function withMaxKeysUrl(url: string, maxKeys: string | number) {
+  if (url.includes("?")) {
+    return `${url}&max-keys=${maxKeys}`;
+  }
+  return `${url}?max-keys=${maxKeys}`;
+}
 
   const closeDeleteMultipleModalAndRefresh = (refresh: boolean) => {
     setDeleteMultipleOpen(false);

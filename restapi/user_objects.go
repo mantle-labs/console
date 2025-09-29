@@ -177,6 +177,7 @@ func getListObjectsResponse(session *models.Principal, params user_api.ListObjec
 	var recursive bool
 	var withVersions bool
 	var withMetadata bool
+	var maxKeys int
 	if params.Prefix != nil {
 		encodedPrefix := SanitizeEncodedPrefix(*params.Prefix)
 		decodedPrefix, err := base64.StdEncoding.DecodeString(encodedPrefix)
@@ -194,6 +195,9 @@ func getListObjectsResponse(session *models.Principal, params user_api.ListObjec
 	if params.WithMetadata != nil {
 		withMetadata = *params.WithMetadata
 	}
+	if params.MaxKeys != nil {
+		maxKeys = *params.MaxKeys
+	}
 	// bucket request needed to proceed
 	if params.BucketName == "" {
 		return nil, prepareError(errBucketNameNotInRequest)
@@ -206,7 +210,7 @@ func getListObjectsResponse(session *models.Principal, params user_api.ListObjec
 	// defining the client to be used
 	minioClient := minioClient{client: mClient}
 
-	objs, err := listBucketObjects(params.HTTPRequest.Context(), minioClient, params.BucketName, prefix, recursive, withVersions, withMetadata)
+	objs, err := listBucketObjects(params.HTTPRequest.Context(), minioClient, params.BucketName, prefix, recursive, withVersions, withMetadata, maxKeys)
 	if err != nil {
 		return nil, prepareError(err)
 	}
@@ -219,13 +223,14 @@ func getListObjectsResponse(session *models.Principal, params user_api.ListObjec
 }
 
 // listBucketObjects gets an array of objects in a bucket
-func listBucketObjects(ctx context.Context, client MinioClient, bucketName string, prefix string, recursive, withVersions bool, withMetadata bool) ([]*models.BucketObject, error) {
+func listBucketObjects(ctx context.Context, client MinioClient, bucketName string, prefix string, recursive, withVersions bool, withMetadata bool, maxKeys int) ([]*models.BucketObject, error) {
 	var objects []*models.BucketObject
 	opts := minio.ListObjectsOptions{
 		Prefix:       prefix,
 		Recursive:    recursive,
 		WithVersions: withVersions,
 		WithMetadata: withMetadata,
+		MaxKeys:      maxKeys,
 	}
 	if withMetadata {
 		opts.MaxKeys = 1
@@ -293,8 +298,8 @@ type httpRange struct {
 }
 
 // Example:
-//   "Content-Range": "bytes 100-200/1000"
-//   "Content-Range": "bytes 100-200/*"
+// "Content-Range": "bytes 100-200/1000"
+// "Content-Range": "bytes 100-200/*"
 func getRange(start, end, total int64) string {
 	// unknown total: -1
 	if total == -1 {
@@ -305,10 +310,11 @@ func getRange(start, end, total int64) string {
 }
 
 // Example:
-//   "Range": "bytes=100-200"
-//   "Range": "bytes=-50"
-//   "Range": "bytes=150-"
-//   "Range": "bytes=0-0,-1"
+//
+//	"Range": "bytes=100-200"
+//	"Range": "bytes=-50"
+//	"Range": "bytes=150-"
+//	"Range": "bytes=0-0,-1"
 func parseRange(s string, size int64) ([]httpRange, error) {
 	if s == "" {
 		return nil, nil // header not present
@@ -493,7 +499,7 @@ func getDownloadFolderResponse(session *models.Principal, params user_api.Downlo
 		return nil, prepareError(err)
 	}
 	minioClient := minioClient{client: mClient}
-	objects, err := listBucketObjects(ctx, minioClient, params.BucketName, prefix, true, false, false)
+	objects, err := listBucketObjects(ctx, minioClient, params.BucketName, prefix, true, false, false, 0)
 	if err != nil {
 		return nil, prepareError(err)
 	}
@@ -663,8 +669,9 @@ func deleteObjects(ctx context.Context, client MCClient, bucket string, path str
 }
 
 // deleteMultipleObjects uses listing before removal, it can list recursively or not,
-//   Use cases:
-//      * Remove objects recursively
+//
+//	Use cases:
+//	   * Remove objects recursively
 func deleteMultipleObjects(ctx context.Context, client MCClient, recursive bool, allVersions bool) error {
 	isRemoveBucket := false
 	isIncomplete := false
