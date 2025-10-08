@@ -12,7 +12,7 @@ import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import { useTranslation } from "react-i18next";
 
-interface SelectedS3ConfigProps {
+interface S3ConfigFormProps {
   config: s3ConfigObject;
   index: number;
   handleInputChange: (
@@ -23,7 +23,7 @@ interface SelectedS3ConfigProps {
   validInput: boolean;
 }
 
-const SelectedS3Config: React.FC<SelectedS3ConfigProps> = ({
+const S3ConfigForm: React.FC<S3ConfigFormProps> = ({
   config,
   index,
   handleInputChange,
@@ -97,4 +97,4 @@ const SelectedS3Config: React.FC<SelectedS3ConfigProps> = ({
   );
 };
 
-export default SelectedS3Config;
+export default S3ConfigForm;

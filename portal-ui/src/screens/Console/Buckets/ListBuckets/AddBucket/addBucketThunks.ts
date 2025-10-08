@@ -70,19 +70,20 @@ export const addBucketAsync = createAsyncThunk<string, s3ConfigObject[]>(
       }
     }
 
-    if(listS3Config.length !== 0 && listS3Config != null){
-      const s3ConfigFile: { [key: string]: any } = {};
-
-      listS3Config.forEach((config, idx) => {
-        s3ConfigFile[`storage${idx+1}`] = {
+    if(listS3Config?.length){
+      const s3ConfigFile = Object.fromEntries(
+        listS3Config.map((config, idx) => [
+        `storage${idx + 1}`,
+        {
         url: config.url,
         accessKey: config.accessKey,
         secretKey: config.secretKey,
         api: config.api,
         path: config.path,
         ...(config.secure === true && { secure: true })
-        };
-      });
+        },
+        ])
+      );
 
       request.file = JSON.stringify(s3ConfigFile);
     }

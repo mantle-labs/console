@@ -20,7 +20,7 @@ import { useAppDispatch } from "../../../../../store";
 import { useTranslation } from "react-i18next";
 import { setErrorSnackMessage } from "../../../../../systemSlice";
 import { ErrorResponseHandler } from "../../../../../common/types";
-import ComponentTabs from "./ComponentTabs";
+import S3ConfigTabs from "./S3ConfigTabs";
 
 export interface s3ConfigObject {
   url: string;
@@ -43,6 +43,7 @@ const AddBucketS3Config = ({
   const dispatch = useAppDispatch();
   const { t } = useTranslation();
   const [s3Errors, setS3Errors] = useState<boolean[]>([]);
+  const [showAllTabs, setShowAllTabs] = useState(false);
 
   const VisuallyHiddenInput = styled("input")({
     clip: "rect(0 0 0 0)",
@@ -130,7 +131,7 @@ const AddBucketS3Config = ({
 
   return (
     <Box sx={{ width: "100%" }}>
-      {listS3Config.length <= 0 && (
+      {(listS3Config.length <= 0 || !showAllTabs) && (
         <Box sx={{ display: "flex", gap: 2 }}>
           <Button
             component="label"
@@ -138,17 +139,7 @@ const AddBucketS3Config = ({
             variant="contained"
             tabIndex={-1}
             onClick={() => {
-              const firstConfig: s3ConfigObject = {
-                url: "",
-                accessKey: "",
-                secretKey: "",
-                api: "s3v4",
-                path: "auto",
-                secure: true,
-              };
-              handleS3ConfigChange([firstConfig]);
-              handleS3Errors([false]);
-              setS3Errors([false]);
+              setShowAllTabs(true);
             }}
           >
             {t("add_a_S3_provider")}
@@ -170,8 +161,8 @@ const AddBucketS3Config = ({
         </Box>
       )}
 
-      {listS3Config.length > 0 && (
-        <ComponentTabs
+      {(listS3Config.length > 0 || showAllTabs) && (
+        <S3ConfigTabs
           listS3Config={listS3Config}
           errors={s3Errors}
           handleS3ConfigChange={handleS3ConfigChange}
@@ -179,6 +170,7 @@ const AddBucketS3Config = ({
             setS3Errors(errors);
             handleS3Errors(errors);
           }}
+          onAllTabsDeleted={() => setShowAllTabs(false)}
         />
       )}
     </Box>

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Box, Tabs, Tab, Button } from "@mui/material";
 import { TabContext, TabPanel } from "@mui/lab";
 import AddIcon from "@mui/icons-material/Add";
@@ -7,24 +7,44 @@ import ShowTextIcon from "../../../../../icons/ShowTextIcon";
 import HideTextIcon from "../../../../../icons/HideTextIcon";
 import { AppState, useAppDispatch } from "../../../../../store";
 import { s3ConfigObject } from "./AddBucketS3Config";
-import SelectedS3Config from "./SelectedS3Config";
+import S3ConfigForm from "./S3ConfigForm";
 import { current } from "@reduxjs/toolkit";
 
-interface ComponentTabsProps {
+interface S3ConfigTabsProps {
   listS3Config: s3ConfigObject[];
   errors: boolean[];
   handleS3ConfigChange: (newTabs: s3ConfigObject[]) => void;
   handleErrorChange: (errors: boolean[]) => void;
+  onAllTabsDeleted: () => void;
 }
 
-const ComponentTabs: React.FC<ComponentTabsProps> = ({
+const S3ConfigTabs: React.FC<S3ConfigTabsProps> = ({
   listS3Config,
   errors,
   handleS3ConfigChange,
   handleErrorChange,
+  onAllTabsDeleted,
 }) => {
   const [currentTab, setCurrentTab] = useState("0");
   const [showTabs, setShowTabs] = useState(true);
+
+  //A default config to use when we need a default one
+  const DEFAULT_S3_CONFIG: s3ConfigObject = {
+    url: "",
+    accessKey: "",
+    secretKey: "",
+    api: "s3v4",
+    path: "auto",
+    secure: true,
+  };
+
+  //Handle the scenario when the listS3Config is empty
+  useEffect(() => {
+  if (listS3Config.length === 0) {
+    handleS3ConfigChange([DEFAULT_S3_CONFIG]);
+    handleErrorChange([false]);
+  }
+}, []);
 
   //Handle to change Tab
   const handleTabChange = (event: React.SyntheticEvent, newValue: string) => {
@@ -34,15 +54,7 @@ const ComponentTabs: React.FC<ComponentTabsProps> = ({
   //Add a new tab
   const handleAddTab = () => {
     const newCurrentTabNumber = listS3Config.length;
-    const newConfigAdded: s3ConfigObject = {
-      url: "",
-      accessKey: "",
-      secretKey: "",
-      api: "s3v4",
-      path: "auto",
-      secure: true,
-    };
-    const newListConfig = [...listS3Config, newConfigAdded];
+    const newListConfig = [...listS3Config, DEFAULT_S3_CONFIG];
     setCurrentTab(newCurrentTabNumber.toString());
     handleS3ConfigChange(newListConfig);
 
@@ -59,10 +71,10 @@ const ComponentTabs: React.FC<ComponentTabsProps> = ({
     const newS3Errors = errors.filter((_, i) => i !== index);
     handleErrorChange(newS3Errors);
 
-    if (parseInt(currentTab) >= newListConfig.length) {
-      setCurrentTab((newListConfig.length - 1).toString());
-    } else {
-      setCurrentTab(currentTab);
+    parseInt(currentTab) >= newListConfig.length ? setCurrentTab((newListConfig.length-1).toString()) : setCurrentTab(currentTab);
+
+    if(newListConfig.length === 0) {
+      onAllTabsDeleted();
     }
   };
 
@@ -76,16 +88,13 @@ const ComponentTabs: React.FC<ComponentTabsProps> = ({
       if (i !== index) return config;
 
       //Add or remove the secure key for the config
-      if (field === "secure") {
-        if (value) {
-          return { ...config, secure: true };
-        } else {
-          const { secure, ...rest } = config;
-          return rest;
-        }
-      }
 
-      return { ...config, [field]: value };
+      return field === "secure"
+              ? value
+                ? { ...config, secure: true }
+                : (({ secure, ...rest }) => rest)(config)
+              : { ...config, [field]: value }
+
     });
     handleS3ConfigChange(newListConfig);
 
@@ -185,8 +194,8 @@ const ComponentTabs: React.FC<ComponentTabsProps> = ({
         )}
       </Box>
 
-      {showTabs && (
-        <SelectedS3Config
+      {showTabs && listS3Config[parseInt(currentTab)] && (
+        <S3ConfigForm
           config={listS3Config[parseInt(currentTab)]}
           index={parseInt(currentTab)}
           handleInputChange={handleInputChange}
@@ -197,4 +206,4 @@ const ComponentTabs: React.FC<ComponentTabsProps> = ({
   );
 };
 
-export default ComponentTabs;
+export default S3ConfigTabs;
