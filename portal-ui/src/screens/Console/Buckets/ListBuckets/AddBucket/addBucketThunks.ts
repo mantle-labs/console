@@ -74,14 +74,7 @@ export const addBucketAsync = createAsyncThunk<string, s3ConfigObject[]>(
       const s3ConfigFile = Object.fromEntries(
         listS3Config.map((config, idx) => [
         `storage${idx + 1}`,
-        {
-        url: config.url,
-        accessKey: config.accessKey,
-        secretKey: config.secretKey,
-        api: config.api,
-        path: config.path,
-        ...(config.secure === true && { secure: true })
-        },
+        config,
         ])
       );
 

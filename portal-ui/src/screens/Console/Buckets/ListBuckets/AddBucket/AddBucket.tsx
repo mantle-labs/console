@@ -244,12 +244,10 @@ const AddBucket = ({ classes }: IsetProps) => {
                   {t("create_buckets_intro")}
                   <br />
                   <br />
-                  <b>{t("versioning")}</b>
-                  {t("versioning_info")}
+                  <b>{t("versioning")}</b>{t("versioning_info")}
                   <br />
                   <br />
-                  <b>{t("object_locking")}</b>
-                  {t("object_locking_info")}{" "}
+                  <b>{t("object_locking")}</b>{t("object_locking_info")}{" "}
                   {!lockingAllowed ? (
                     <Fragment>
                       <br />
@@ -269,8 +267,7 @@ const AddBucket = ({ classes }: IsetProps) => {
                     <Fragment>
                       <br />
                       <br />
-                      <b>{t("retention")}</b>
-                      {t("retention_info")}
+                      <b>{t("retention")}</b>{t("retention_info")}
                     </Fragment>
                   )}
                   <br />
