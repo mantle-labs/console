@@ -46,7 +46,7 @@ export default function BucketHealthInfo({bucketName}: {bucketName: string}) {
             .catch((err: ErrorResponseHandler) => {
                 dispatch(setErrorSnackMessage(err));
             });
-    }, [])
+    }, [bucketName])
     return (
         <Box mt={4}>
             <Typography variant="h6" gutterBottom sx={{}}>

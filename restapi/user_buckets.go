@@ -1045,6 +1045,9 @@ func getBucketRewindResponse(session *models.Principal, params user_api.GetBucke
 }
 
 func getSdsHealthResponse(session *models.Principal, params user_api.GetBucketHealthParams) ([]*models.BucketHealthResponse, *models.Error) {
+	if params.Name == "" {
+		return nil, prepareError(errBucketNameNotInRequest)
+	}
 	ctx, cancel := context.WithCancel(context.Background())
 	defer cancel()
 	mClient, err := newMinioClient(session)
