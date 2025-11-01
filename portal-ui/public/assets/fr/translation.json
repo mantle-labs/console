@@ -516,5 +516,14 @@
   "sharding": "Fragmentation",
   "operation": "Opération",
   "downloads_uploads": "Téléchargements / Téléversement",
-  "done": "Terminé"
+  "done": "Terminé",
+  "add_a_S3_provider": "ajouter un fournisseur s3",
+  "accesskey": "Clé d'accès",
+  "secretkey": "Clé secrète",
+  "deleteprovider": "Supprimer le fournisseur",
+  "url_error_prefix_port" : "L'URL ne doit contenir aucun préfixe et doit avoir un port valide",
+  "secure" : "Sécurisé",
+  "upload_s3_file" : "Téléverser la configuration S3",
+  "JSON_preview" : "Aperçu JSON Des Fournisseurs S3",
+  "file_notJSON" : "Fichier illisible, car le type de contenu n'est pas un JSON"
 }

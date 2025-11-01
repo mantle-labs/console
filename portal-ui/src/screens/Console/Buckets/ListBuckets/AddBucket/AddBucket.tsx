@@ -58,8 +58,8 @@ import AddBucketName from "./AddBucketName";
 import { IAM_SCOPES } from "../../../../../common/SecureComponent/permissions";
 import { hasPermission } from "../../../../../common/SecureComponent";
 import BucketNamingRules from "./BucketNamingRules";
-import { useTranslation } from 'react-i18next';
-import AddBucketS3Config from "./AddBucketS3Config";
+import { useTranslation } from "react-i18next";
+import AddBucketS3Config, { s3ConfigObject } from "./AddBucketS3Config";
 
 const styles = (theme: Theme) =>
   createStyles({
@@ -120,9 +120,13 @@ const AddBucket = ({ classes }: IsetProps) => {
   );
   const bucketName = useSelector((state: AppState) => state.addBucket.name);
   const [validationResult, setValidationResult] = useState<boolean[]>([]);
+  const [s3ValidationResult, setS3ValidationResult] = useState<boolean[]>([]);
   const errorList = validationResult.filter((v) => !v);
   const hasErrors = errorList.length > 0;
+  const s3ErrorList = s3ValidationResult.filter((v) => !v);
+  const hasS3Errors = s3ErrorList.length > 0;
   const [records, setRecords] = useState<string[]>([]);
+  const [listS3Config, setListS3Config] = useState<s3ConfigObject[]>([]);
   const versioningEnabled = useSelector(
     (state: AppState) => state.addBucket.versioningEnabled
   );
@@ -181,6 +185,16 @@ const AddBucket = ({ classes }: IsetProps) => {
     setValidationResult(bucketNameErrors);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [bucketName]);
+
+//function that will set a error if there is one passed by the child
+  const handleS3Errors = (errors: boolean[]) => {
+    setS3ValidationResult(errors);
+  };
+  
+//function that will set a new list of s3 config if there is one passed by the child
+  const handleS3ConfigChange = (s3Config: s3ConfigObject[]) => {
+    setListS3Config(s3Config);
+  };
 
   useEffect(() => {
     const fetchRecords = () => {
@@ -268,7 +282,7 @@ const AddBucket = ({ classes }: IsetProps) => {
             autoComplete="off"
             onSubmit={(e: React.FormEvent<HTMLFormElement>) => {
               e.preventDefault();
-              dispatch(addBucketAsync());
+              dispatch(addBucketAsync(listS3Config));
             }}
           >
             <Grid container marginTop={1} spacing={2}>
@@ -276,7 +290,7 @@ const AddBucket = ({ classes }: IsetProps) => {
                 <AddBucketName hasErrors={hasErrors} />
               </Grid>
               <Grid item xs={12}>
-                <AddBucketS3Config />
+                <AddBucketS3Config listS3Config={listS3Config} handleS3Errors={handleS3Errors} handleS3ConfigChange={handleS3ConfigChange}/>
               </Grid>
               <Grid item xs={12}>
                 <BucketNamingRules errorList={validationResult} />
@@ -470,7 +484,12 @@ const AddBucket = ({ classes }: IsetProps) => {
                 type="submit"
                 variant="contained"
                 color="primary"
-                disabled={addLoading || invalidFields.length > 0 || hasErrors}
+                disabled={
+                  addLoading ||
+                  invalidFields.length > 0 ||
+                  hasErrors ||
+                  hasS3Errors
+                }
               >
                 {t("create_bucket")}
               </Button>

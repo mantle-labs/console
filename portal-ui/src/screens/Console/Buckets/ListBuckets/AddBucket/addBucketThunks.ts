@@ -22,10 +22,11 @@ import { setErrorSnackMessage } from "../../../../../systemSlice";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { AppState } from "../../../../../store";
 import { resetForm } from "./addBucketsSlice";
+import { s3ConfigObject } from "./AddBucketS3Config";
 
-export const addBucketAsync = createAsyncThunk(
+export const addBucketAsync = createAsyncThunk<string, s3ConfigObject[]>(
   "buckets/addBucketAsync",
-  async (_, { getState, rejectWithValue, dispatch }) => {
+  async (listS3Config, { getState, rejectWithValue, dispatch }) => {
     const state = getState() as AppState;
 
     const bucketName = state.addBucket.name;
@@ -69,22 +70,17 @@ export const addBucketAsync = createAsyncThunk(
       }
     }
 
-    var fileInput = document.getElementById('fileInput') as any;
-    var promise = new Promise<void>((resolve, reject) => {
-      if (fileInput !== null && fileInput.files[0] !== undefined) {
-        console.log(fileInput.files[0])
-        var reader = new FileReader()
-        reader.onload = async (e) => {
-          request.file = e.target?.result
-          resolve()
-        }
-        reader.readAsText(fileInput.files[0])
-      } else {
-        resolve()
-      }
-    })
+    if(listS3Config?.length){
+      const s3ConfigFile = Object.fromEntries(
+        listS3Config.map((config, idx) => [
+        `storage${idx + 1}`,
+        config,
+        ])
+      );
 
-    await promise
+      request.file = JSON.stringify(s3ConfigFile);
+    }
+
     return api
       .invoke("POST", "/api/v1/buckets", request)
       .then((res) => {
