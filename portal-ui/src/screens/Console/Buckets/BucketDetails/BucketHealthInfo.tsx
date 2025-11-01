@@ -28,13 +28,13 @@ const getStatusChip = (status: string) => {
     }
 };
 
-export default function BucketHealthInfo() {
+export default function BucketHealthInfo({bucketName}: {bucketName: string}) {
     const dispatch = useAppDispatch();
     const [bucketHealth, setBucketHealth] = useState<BucketHealth[]>([])
 
     useEffect(() => {
         api
-            .invoke("GET", `/api/v1/buckets/default/health`)
+            .invoke("GET", `/api/v1/buckets/${bucketName}/health`)
             .then((res: BucketHealth[]) => {
 
                 const sortedBucketHealth = [...res].sort((a: BucketHealth, b: BucketHealth) =>
@@ -46,7 +46,7 @@ export default function BucketHealthInfo() {
             .catch((err: ErrorResponseHandler) => {
                 dispatch(setErrorSnackMessage(err));
             });
-    }, [])
+    }, [bucketName])
     return (
         <Box mt={4}>
             <Typography variant="h6" gutterBottom sx={{}}>

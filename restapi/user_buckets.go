@@ -1045,6 +1045,9 @@ func getBucketRewindResponse(session *models.Principal, params user_api.GetBucke
 }
 
 func getSdsHealthResponse(session *models.Principal, params user_api.GetBucketHealthParams) ([]*models.BucketHealthResponse, *models.Error) {
+	if params.Name == "" {
+		return nil, prepareError(errBucketNameNotInRequest)
+	}
 	ctx, cancel := context.WithCancel(context.Background())
 	defer cancel()
 	mClient, err := newMinioClient(session)
@@ -1052,7 +1055,7 @@ func getSdsHealthResponse(session *models.Principal, params user_api.GetBucketHe
 		return nil, prepareError(err)
 	}
 
-	storageHealth, err := mClient.GetSDSHealth(ctx, "", "", minio.GetObjectOptions{})
+	storageHealth, err := mClient.GetSDSHealth(ctx, params.Name, "", minio.GetObjectOptions{})
 	if err != nil {
 		return nil, prepareError(err)
 	}
