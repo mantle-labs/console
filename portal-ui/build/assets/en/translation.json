@@ -516,5 +516,14 @@
   "sharding": "Sharding",
   "operation": "Operation",
   "downloads_uploads": "Downloads / Uploads",
-  "done": "Done"
+  "done": "Done",
+  "add_a_S3_provider": "Add A S3 Provider",
+  "accesskey": "Access Key",
+  "secretkey": "Secret Key",
+  "deleteprovider": "Delete Provider",
+  "url_error_prefix_port" : "The URL must not contain any prefix and must have a valid port",
+  "secure" : "Secure",
+  "upload_s3_file" : "Upload s3 config file",
+  "JSON_preview" : "S3 Providers JSON Preview",
+  "file_notJSON" : "File not readable, because the type of content is not a JSON"
 }
